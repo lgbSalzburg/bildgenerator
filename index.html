@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meme-It</title>
+    <title>Grüne Memes</title>
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/svg" sizes="16x16" href="resources/images/Gruene_Logo.svg">
     <link rel="manifest" href="resources/favicon/site.webmanifest">
     <link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#ffed00">
     <!-- Main font -->
     <link href="resources/css/lato-font.css" rel="stylesheet">
     <!-- Fontawesome -->
@@ -32,26 +30,25 @@
 <body>
     <div class="container col-12">
         <div class="header mt-4 text-center col-12 col-md-10 col-lg-6 mr-auto ml-auto">
-            <h1 class="text-dark display-5">Meme <i class="fas fa-laugh-wink text-info"></i> It
+            <h1 class="text-dark display-5"><img src="resources/images/Gruene_Logo.svg" width=50/>rüne Memes
             </h1>
-            <span class="text-muted discription">Meme it is a simple meme generator built using HTML5 Canvas library
-                Fabric.Js, and its allows you to manipulate text or images on chosen meme template.<br><a
-                    href="https://github.com/Abd3lwahab/meme-it" target="_blank" class="badge badge-dark"><i
+
+            <span class="text-muted discription">Grüner Bild Generator, basierend auf Meme-it.<br><a
+                    href="https://github.com/flomotlik/meme-it" target="_blank" class="badge badge-dark"><i
                         class="fab fa-github mr-1"></i>GitHub</a></span>
         </div>
     </div>
     <div class="choice-section mt-5">
         <div class="choice text-center mr-auto ml-auto mb-5">
             <div class="d-inline-block mb-2">
-                <p class="display-5 mb-0 ">Select from the top 100 memes frequently used <span
-                        class="text-danger">Or</span>
+                <p class="display-5 mb-0 ">Suche ein Bild aus
                 </p>
             </div>
             <div class="form-group input-image mb-0">
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="meme-input">
-                        <label class="custom-file-label mb-0" for="meme-input">Choose image</label>
+                        <label class="custom-file-label mb-0" for="meme-input">Bild aussuchen</label>
                     </div>
                 </div>
             </div>
@@ -85,8 +82,10 @@
                             <textarea class="form-control text-method" id="text" placeholder="Type your text here"
                                 rows="2"></textarea>
                             <span class="input-group-append">
-                                <span class="input-group-text colorpicker-input-addon" id="text-color"
-                                    value="#ffffff"><i></i></span>
+                              <select class="form-control text-method" name="text-color" id="text-color">
+                                    <option value="rgb(255,240,0)">Gelb</option>
+                                    <option value="rgb(255,255,255)">Weiß</option>
+                            </select>
                             </span>
                         </div>
                     </div>
@@ -95,16 +94,8 @@
                             <label for="font-size">Font Family: </label>
                             <select class="form-control text-method" name="font-family" id="font-family">
                                 <optgroup label="English">
-                                    <option value="Arial">Arial</option>
+                                    <option value="Gotham Narrow">Gotham Narrow</option>
                                     <option value="Arial Black">Arial Black</option>
-                                    <option value="Comic Sans Ms">Comic Sans Ms</option>
-                                    <option value="Impact">Impact</option>
-                                    <option value="Times New Roman">Times New Roman</option>
-                                    <option value="Trebuchet MS">Trebuchet MS</option>
-                                </optgroup>
-                                <optgroup label="Arabic">
-                                    <option value="Bahij Myriad Arabic Bold">Bahij Myriad Arabic</option>
-                                    <option value="Hacen Liner XXL">Hacen Liner XXL</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -217,7 +208,7 @@
     <script src="vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="vendors/masonry/masonry.pkgd.min.js"></script>
 
-    <script src="vendors/fabric-js/fabric.js"></script>
+    <script src="vendors/fabric-js/fabric.min.js"></script>
 
     <script src="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
     <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>

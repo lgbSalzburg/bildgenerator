@@ -44,14 +44,13 @@ function processMeme(memeInfo) {
             fontFamily: $('#font-family').find(":selected").attr('value'),
             textAlign: $('input[name="align"]:checked').val(),
             fontSize: $('#font-size').val(),
-            fill: $('#cp-text').colorpicker('getValue'),
+            fill: $('#text-color').find(":selected").attr('value'),
             fontStyle: $('#italic').attr('data'),
             fontWeight: $('#bold').attr('data'),
             underline: $('#underline').attr('data'),
             stroke: $('#cp-stroke').colorpicker('getValue'),
             strokeWidth: $('#stroke-width').val(),
             shadow: createShadow($('#cp-shadow').colorpicker('getValue'), $('#shadow-depth').val()),
-            textBackgroundColor: getBackgroundColor($('#cp-background').colorpicker('getValue')),
             opacity: parseFloat($('#opacity').val() / 100),
         })
         

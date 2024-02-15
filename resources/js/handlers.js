@@ -1,6 +1,6 @@
 // Handle custom fonts
 function loadFont(font) {
-    const customFonts = ['Arial Black', 'Comic Sans Ms', 'Impact', 'Trebuchet MS', 'Bahij Myriad Arabic Bold', 'Hacen Liner XXL']
+    const customFonts = ['Gotham Narrow']
     var text = canvas.getActiveObject()
     if (customFonts.includes(font)) {
         var myfont = new FontFaceObserver(font)
@@ -24,8 +24,8 @@ function updateInputs() {
     if (activeObject.get('type') == "text") {
         enableTextMethods()
         $('#text').val(activeObject.text)
-        $('#cp-text').colorpicker('setValue', activeObject.fill)
         $('#font-family').val(activeObject.fontFamily).selectpicker('refresh')
+        $('#text-color').val(activeObject.fill).selectpicker('refresh')
         $('#font-size').val(activeObject.fontSize)
         $('#bold').attr('data', activeObject.fontWeight).trigger('update-status')
         $('#italic').attr('data', activeObject.fontStyle).trigger('update-status')
