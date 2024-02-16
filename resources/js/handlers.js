@@ -27,16 +27,10 @@ function updateInputs() {
         $('#font-family').val(activeObject.fontFamily).selectpicker('refresh')
         $('#text-color').val(activeObject.fill).selectpicker('refresh')
         $('#font-size').val(activeObject.fontSize)
-        $('#bold').attr('data', activeObject.fontWeight).trigger('update-status')
-        $('#italic').attr('data', activeObject.fontStyle).trigger('update-status')
-        $('#underline').attr('data', activeObject.underline).trigger('update-status')
         $(`input[value="${activeObject.textAlign}"]`).parent().trigger('update-status')
-        $('#cp-stroke').colorpicker('setValue', activeObject.stroke)
         $('#stroke-width').val(activeObject.strokeWidth)
         $('#shadow-depth').val(activeObject.shadow.blur)
-        $('#cp-shadow').colorpicker('setValue', activeObject.shadow.color)
         $('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
-        $('#cp-background').colorpicker('setValue', activeObject.textBackgroundColor)
     } else {
         // Disable text methods when select an image
         disableTextMethods()
@@ -61,8 +55,12 @@ function loadObjectHandlers() {
         }
     })
 
-    $('#cp-text').off('colorpickerChange').on('colorpickerChange', function () {
-        setValue("fill", $(this).colorpicker('getValue'))
+
+    $('#text-color').off('change').on('change', function () {
+        $('#text-color').selectpicker('refresh')
+        if (canvas.getActiveObject() != null) {
+          setValue("fill", $(this).find(":selected").attr('value'))
+        }
     })
 
     $('#font-family').off('change').on('change', function () {
@@ -76,53 +74,20 @@ function loadObjectHandlers() {
         setValue("fontSize", $(this).val())
     })
 
-    $('#bold').off('change-value').on('change-value', function () {
-        setValue("fontWeight", $(this).attr('data'))
-    })
-
-    $('#italic').off('change-value').on('change-value', function () {
-        setValue("fontStyle", $(this).attr('data'))
-    })
-
-    $('#underline').off('change-value').on('change-value', function () {
-        setValue("underline", $(this).attr('data'))
-    })
-
     $('input[name="align"]').off('change').on('change', function () {
         setValue("textAlign", $(this).attr('id'))
     })
 
-    $('#cp-stroke').off('colorpickerChange').on('colorpickerChange', function () {
-        setValue("stroke", $(this).colorpicker('getValue'))
-    })
-
     $('#stroke-width').off('input').on('input', function () {
-        if ($(this).val() == 0) {
-            $(this).val(null)
+        var actualWidth=$(this).val()
+        if (actualWidth == 0) {
+            actualWidth = null
         }
-        setValue("strokeWidth", $(this).val())
-    })
-
-    $('#cp-shadow').off('colorpickerChange').on('colorpickerChange', function () {
-        setValue("shadow", createShadow($('#cp-shadow').colorpicker('getValue'), $('#shadow-depth').val()))
+        setValue("strokeWidth", actualWidth)
     })
 
     $('#shadow-depth').off('input').on('input', function () {
-        setValue("shadow", createShadow($('#cp-shadow').colorpicker('getValue'), $('#shadow-depth').val()))
-    })
-
-    $('#bg-option').off('click').on('click', function () {
-        if ($(this).hasClass('active')) {
-            $(this).removeClass('active')
-            setBackgroundColor('')
-        } else {
-            $(this).addClass('active')
-            setBackgroundColor($('#cp-background').colorpicker('getValue'))
-        }
-    })
-
-    $('#cp-background').off('colorpickerChange').on('colorpickerChange', function () {
-        setBackgroundColor($('#cp-background').colorpicker('getValue'))
+        setValue("shadow", createShadow('black', $('#shadow-depth').val()))
     })
 
     $('#opacity').off('input').on('input', function () {

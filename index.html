@@ -10,7 +10,7 @@
     <link rel="manifest" href="resources/favicon/site.webmanifest">
     <link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffed00">
+    <meta name="theme-color" content="#ffffff">
     <!-- Main font -->
     <link href="resources/css/lato-font.css" rel="stylesheet">
     <!-- Fontawesome -->
@@ -18,7 +18,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
     <!-- Color Picker -->
-    <link rel="stylesheet" href="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
+    <!-- <link rel="stylesheet" href="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.css"> -->
     <!-- Bootstrap select-->
     <link rel="stylesheet" href="vendors/bootstrap-select/bootstrap-select.min.css">
     <!-- Fonts -->
@@ -91,101 +91,68 @@
                     </div>
                     <div class="form-group form-row mb-0">
                         <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
-                            <label for="font-size">Font Family: </label>
+                            <label for="font-size">Schriftart: </label>
                             <select class="form-control text-method" name="font-family" id="font-family">
                                 <optgroup label="English">
                                     <option value="Gotham Narrow">Gotham Narrow</option>
-                                    <option value="Arial Black">Arial Black</option>
                                 </optgroup>
                             </select>
                         </div>
                         <div class="form-group col-5 col-sm-6 col-md-5 col-lg-3">
-                            <label for="font-size">Font Size: </label>
+                            <label for="font-size">Größe: </label>
                             <input class="form-control text-method" type="number" value="150" id="font-size">
                         </div>
-                        <div class="form-group col-6 col-lg-4">
-                            <label for="font-size">Style: </label>
-                            <div>
-                                <div class="input-group" id="font-style">
-                                    <button class="btn btn-warning edit-btn mr-1 text-method" id="bold" value="bold"
-                                        data><i class="fas fa-bold"></i></button>
-                                    <button class="btn btn-warning edit-btn mr-1 text-method" id="italic" value="italic"
-                                        data><i class="fas fa-italic"></i></button>
-                                    <button class="btn btn-warning edit-btn text-method" id="underline" value="true"
-                                        data><i class="fas fa-underline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-6 col-lg-auto">
-                            <label for="font-size">Text alignment: </label>
-                            <div>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-warning active align">
-                                        <input type="radio" value="left" name="align" id="left" checked> <i
-                                            class="fas fa-align-left"></i>
-                                    </label>
-                                    <label class="btn btn-warning align">
-                                        <input type="radio" value="center" name="align" id="center"> <i
-                                            class="fas fa-align-center"></i>
-                                    </label>
-                                    <label class="btn btn-warning align">
-                                        <input type="radio" value="right" name="align" id="right"> <i
-                                            class="fas fa-align-right"></i>
-                                    </label>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
-                            <label for="font-size">Stroke: </label>
-                            <div class="input-group cp cp-black" id="cp-stroke">
-                                <input class="form-control text-method" type="number" value="1" id="stroke-width"
+                              <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
+                            <label for="font-size">Linie: </label>
+                            <div class="input-group" id="cp-stroke">
+                                <input class="form-control text-method" type="number" value="0" id="stroke-width"
                                     min="0" max="20" placeholder="0">
-                                <span class="input-group-append">
-                                    <span class="input-group-text colorpicker-input-addon" id="stroke-color"
-                                        value="#000000"><i></i></span>
-                                </span>
                             </div>
                         </div>
                         <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
-                            <label for="font-size">Shadow: </label>
+                            <label for="font-size">Schatten: </label>
                             <div class="input-group cp cp-black" id="cp-shadow">
-                                <input class="form-control text-method" type="number" value="5" id="shadow-depth"
+                                <input class="form-control text-method" type="number" value="3" id="shadow-depth"
                                     min="0" max="20" placeholder="0">
-                                <span class="input-group-append">
-                                    <span class="input-group-text colorpicker-input-addon" id="shadow-color"
-                                        value="#000000"><i></i></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="form-group col-auto col-sm-auto col-md-auto col-lg-auto">
-                            <label for="font-size">BG Color: </label>
-                            <div class="input-group cp cp-black" id="cp-background">
-                                <button class="btn btn-warning edit-btn text-method" id="bg-option" value="" data><i
-                                        class="fas fa-fill-drip"></i></button>
-                                <span class="input-group-append">
-                                    <span class="input-group-text colorpicker-input-addon" id="bg-color"
-                                        value="#000000"><i></i></span>
-                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mb-4">
+                    <!-- <div class="form-group mb-4">
                         <label for="opacity">Opacity:</label>
                         <input type="range" class="form-control-range" id="opacity" min="0" max="100" value="100">
-                    </div>
+                    </div> -->
                     <div class="form-group form-row add-btns pb-3">
                         <div class="col-auto">
-                            <button class="btn btn-warning" id="add-text">Add text</button>
+                            <button class="btn btn-warning" id="add-text">Text einfügen</button>
                         </div>
                         <div class="custom-file col">
                             <input type="file" class="custom-file-input d-none" id="add-image">
-                            <label class="btn btn-warning mb-0" for="add-image">Add Image</label>
+                            <label class="btn btn-warning mb-0" for="add-image">Bild einfügen</label>
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
+                    <label for="image-format">Download Format: </label>
+                    <select class="form-control text-method" name="image-format" id="image-format">
+                        <optgroup label="English">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
+                    <label for="font-size">Qualität: </label>
+                    <p>Nur bei JPEG Format relevant</p>
+                    <select class="form-control text-method" name="image-quality" id="image-quality">
+                        <optgroup label="English">
+                            <option value="1.0">Groß</option>
+                            <option value="0.5">Mittel</option>
+                            <option value="0.1">Klein</option>
+                        </optgroup>
+                    </select>
+                </div>
                 <div class="mb-4 mt-3">
-                    <button class="btn btn-success" id="generate-meme">Generate Meme</button>
+                    <button class="btn btn-success" id="generate-meme">Download</button>
                 </div>
             </div>
         </div>
@@ -200,7 +167,7 @@
         </div>
     </script>
 
-    <script src="vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="vendors/jquery/jquery-3.7.1.min.js"></script>
     <script src="vendors/popper/popper.min.js"></script>
     <script src="vendors/bootstrap/bootstrap.min.js"></script>
 
@@ -210,7 +177,6 @@
 
     <script src="vendors/fabric-js/fabric.min.js"></script>
 
-    <script src="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
     <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
 
     <script src="vendors/fontfaceobserver/fontfaceobserver.standalone.js"></script>

@@ -14,7 +14,8 @@ function processMeme(memeInfo) {
         width: memeInfo.width,
         height: memeInfo.height,
         selection: false,
-        allowTouchScrolling: true
+        allowTouchScrolling: true,
+        objectCaching: false
     });
 
     // Scale is a range input allow small screen users to scale the object easily
@@ -36,22 +37,23 @@ function processMeme(memeInfo) {
             showAlert('Error! Text field is empty')
             return
         }
+
+        console.log($('#stroke-width').val())
         
         // Create new text object
         var text = new fabric.Text($('#text').val(), {
             top: 10,
             left: 10,
+            minWidth: canvas.width,
             fontFamily: $('#font-family').find(":selected").attr('value'),
-            textAlign: $('input[name="align"]:checked').val(),
-            fontSize: $('#font-size').val(),
+            fontSize: parseInt($('#font-size').val()),
+            fontStyle: 'normal',
+            textAlign: 'left',
             fill: $('#text-color').find(":selected").attr('value'),
-            fontStyle: $('#italic').attr('data'),
-            fontWeight: $('#bold').attr('data'),
-            underline: $('#underline').attr('data'),
-            stroke: $('#cp-stroke').colorpicker('getValue'),
-            strokeWidth: $('#stroke-width').val(),
-            shadow: createShadow($('#cp-shadow').colorpicker('getValue'), $('#shadow-depth').val()),
-            opacity: parseFloat($('#opacity').val() / 100),
+            stroke: '#000000',
+            strokeWidth: parseInt($('#stroke-width').val()),
+            shadow: createShadow('#000000', $('#shadow-depth').val()),
+            objectCaching: false
         })
         
         text.scaleToWidth(canvas.width / 2)
@@ -111,15 +113,12 @@ function processMeme(memeInfo) {
     })
 
     $('#generate-meme').off('click').on('click', function () {
-        var dataURL = canvas.toDataURL({
-            format: 'png',
-        });
+        var dataURL = canvas.toDataURL({format: $('#image-format').find(":selected").attr('value'), quality: parseFloat($('#image-quality').find(":selected").attr('value'))});
+
 
         var link = document.createElement('a');
         link.href = dataURL;
         link.download = createImgName();
-        document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
     })
 }

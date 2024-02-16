@@ -20,18 +20,12 @@ function disableTextMethods() {
     $('.text-method').attr('disabled', 'disabled')
     $('#font-family').selectpicker('refresh')
     $('.align').addClass('disabled')
-    $.each($('.cp'), function (i, cp) {
-        ($(cp).colorpicker('colorpicker')).disable()
-    })
 }
 
 function enableTextMethods() {
     $('.text-method').attr('disabled', false)
     $('#font-family').selectpicker('refresh')
     $('.align').removeClass('disabled')
-    $.each($('.cp'), function (i, cp) {
-        ($(cp).colorpicker('colorpicker')).enable();
-    })
 }
 
 function createShadow(color, width) {
@@ -43,7 +37,7 @@ function setBackgroundColor(color) {
 }
 
 function isImage(fileType) {
-    const validImageTypes = ['image/jpeg', 'image/png'];
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
     if (validImageTypes.includes(fileType)) {
         return true
     }
@@ -58,7 +52,8 @@ function createImgName() {
     for (var i = 0; i < 6; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    return `${result}.png`;
+    var format = $('#image-format').find(":selected").attr('value')
+    return `${result}.${format}`;
 }
 
 // Show alert message
