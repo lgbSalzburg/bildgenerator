@@ -31,6 +31,34 @@ function processMeme(memeInfo) {
         crossOrigin: "anonymous"
     });
 
+    var strokeWidth = canvas.width / 10;
+
+    var rectangle = new fabric.Rect({
+        width: canvas.width - strokeWidth,
+        height: canvas.height - strokeWidth,
+        fill: '',
+        stroke: 'rgba(138,180,20)',
+        strokeWidth: strokeWidth,
+        selectable: false,
+    });
+    
+    canvas.add(rectangle);
+    canvas.centerObject(rectangle);
+
+    var snapZone = 20;
+    canvas.on('object:moving', function (options) {
+        var objectWidth = options.target.getBoundingRect().width
+        // objectWidth = objectWidth * 1.25
+        // console.log(options.target.width)
+        var objectMiddle = options.target.left + objectWidth / 2;
+        if (objectMiddle > canvas.width / 2 - snapZone &&
+            objectMiddle < canvas.width / 2 + snapZone) {
+            options.target.set({
+                left: canvas.width / 2 - objectWidth / 2,
+            }).setCoords();
+        }
+    });
+
     // Event: Add new text
     $('#add-text').off('click').on('click', function () {
         if ($('#text').val() == '') {
@@ -38,17 +66,15 @@ function processMeme(memeInfo) {
             return
         }
 
-        console.log($('#stroke-width').val())
-        
+       
         // Create new text object
         var text = new fabric.Text($('#text').val(), {
-            top: 10,
-            left: 10,
+            top: 200,
             minWidth: canvas.width,
             fontFamily: $('#font-family').find(":selected").attr('value'),
             fontSize: parseInt($('#font-size').val()),
             fontStyle: 'normal',
-            textAlign: 'left',
+            textAlign: 'center',
             fill: $('#text-color').find(":selected").attr('value'),
             stroke: '#000000',
             strokeWidth: parseInt($('#stroke-width').val()),
@@ -56,11 +82,13 @@ function processMeme(memeInfo) {
             objectCaching: false
         })
         
-        text.scaleToWidth(canvas.width / 2)
+        text.scaleToWidth(canvas.width / 3)
         $('#scale').val(text.scaleX)
 
         canvas.add(text).setActiveObject(text);
-        loadFont(text.fontFamily)
+        loadFont(text.fontFamily);
+        canvas.centerObject(text);
+
     })
 
     // Event: Add new image
@@ -114,8 +142,6 @@ function processMeme(memeInfo) {
 
     $('#generate-meme').off('click').on('click', function () {
         var dataURL = canvas.toDataURL({format: $('#image-format').find(":selected").attr('value'), quality: parseFloat($('#image-quality').find(":selected").attr('value'))});
-
-
         var link = document.createElement('a');
         link.href = dataURL;
         link.download = createImgName();
