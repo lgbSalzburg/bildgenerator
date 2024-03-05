@@ -30,10 +30,10 @@
 <body>
     <div class="container col-12">
         <div class="header mt-4 text-center col-12 col-md-10 col-lg-6 mr-auto ml-auto">
-            <h1 class="text-dark display-5"><img src="resources/images/Gruene_Logo.svg" width=50 />rüne Memes
+            <h1 class="text-dark display-5"><img src="resources/images/Gruene_Logo.svg" width=50 />rüner Bildgenerator
             </h1>
 
-            <span class="text-muted discription">Grüner Bild Generator, basierend auf Meme-it.<br><a
+            <span class="text-muted discription">Bild Generator, basierend auf Meme-it.<br><a
                     href="https://github.com/flomotlik/meme-it" target="_blank" class="badge badge-dark"><i
                         class="fab fa-github mr-1"></i>GitHub</a></span>
         </div>
@@ -60,14 +60,11 @@
         </div>
     </div>
 
-    <div class="container edit-section d-none">
-        <div class="back-btn mb-2">
-            <button class="btn btn-danger"><i class="fas fa-arrow-left"></i> Back</button>
-        </div>
+    <div class="container edit-section">
         <div class="row">
             <div class="col-md-6">
                 <div class="meme-preview">
-                    <div class="fabric-canvas-wrapper"></div>
+                    <div class="fabric-canvas-wrapper"><canvas id="meme-canvas"></canvas></div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -77,12 +74,11 @@
                         <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01">
                     </div>
                     <div class="form-group">
-                        <label for="canvas-border">Rand:</label>
+                        <label for="canvas-template">Vorlage:</label>
                         <span class="input-group-append">
-                            <select class="form-control text-method" name="canvas-border" id="canvas-border">
-                                <option value="20">Mittel</option>
-                                <option value="10">Groß</option>
-                                <option value="5000">Kein</option>
+                            <select class="form-control text-method" name="canvas-template" id="canvas-template">
+                                <option value="story">Story</option>
+                                <option value="post">Post</option>
                             </select>
                         </span>
                     </div>
@@ -136,6 +132,9 @@
                         <div class="custom-file col">
                             <input type="file" class="custom-file-input d-none" id="add-image">
                             <label class="btn btn-warning mb-0" for="add-image">Bild einfügen</label>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-warning" id="remove-element">Löschen</button>
                         </div>
                     </div>
                 </div>
