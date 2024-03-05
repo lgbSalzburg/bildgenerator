@@ -31,7 +31,7 @@ function processMeme(memeInfo) {
         crossOrigin: "anonymous"
     });
 
-    var strokeWidth = canvas.width / 10;
+    var strokeWidth = canvas.width / 20;
 
     var rectangle = new fabric.Rect({
         width: canvas.width - strokeWidth,
