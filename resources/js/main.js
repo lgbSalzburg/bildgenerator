@@ -31,9 +31,9 @@ function processMeme(memeInfo) {
         crossOrigin: "anonymous"
     });
 
-    var strokeWidth = canvas.width / 20;
+    var strokeWidth = canvas.width / $('#canvas-border').find(":selected").attr('value');
 
-    var rectangle = new fabric.Rect({
+    var border = new fabric.Rect({
         width: canvas.width - strokeWidth,
         height: canvas.height - strokeWidth,
         fill: '',
@@ -42,8 +42,13 @@ function processMeme(memeInfo) {
         selectable: false,
     });
     
-    canvas.add(rectangle);
-    canvas.centerObject(rectangle);
+    canvas.add(border);
+    canvas.centerObject(border);
+
+    $('#canvas-border').off('change').on('change', function () {
+        $('#canvas-border').selectpicker('refresh')
+        border.strokeWidth = $('#canvas-border').find(":selected").attr('value')
+    })
 
     var snapZone = 20;
     canvas.on('object:moving', function (options) {
