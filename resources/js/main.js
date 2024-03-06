@@ -13,7 +13,6 @@ function replaceCanvas() {
     var height;
     var topBorderMultiplier = 1;
     var border = 10;
-    console.log(template)
     switch (template) {
         case 'story':
             width = 1080
@@ -52,11 +51,9 @@ function replaceCanvas() {
 
     resizeCanvas();
     canvas.renderAll();
-    console.log("replaced")
 
     topDistance = (canvas.width / border) * topBorderMultiplier
     borderDistance = (canvas.width / border)
-    console.log(borderDistance)
 
     contentRect = new fabric.Rect({
         top: topDistance,
@@ -76,8 +73,6 @@ function enableSnap() {
     var snapZone = 20;
     canvas.on('object:moving', function (options) {
         var objectWidth = options.target.getBoundingRect().width
-        // objectWidth = objectWidth * 1.25
-        // console.log(options.target.width)
         var objectMiddle = options.target.left + objectWidth / 2;
         if (objectMiddle > canvas.width / 2 - snapZone &&
             objectMiddle < canvas.width / 2 + snapZone) {
@@ -92,9 +87,7 @@ replaceCanvas();
 
 $('#canvas-template').off('change').on('change', function () {
     $('#canvas-template').selectpicker('refresh');
-    console.log('Change Stroke Width');
     replaceCanvas();
-
 })
 
 $('#add-text').off('click').on('click', function () {
@@ -198,11 +191,31 @@ function processMeme(memeInfo) {
         originalHeight = meme.height;
         contentImage = meme;
         meme.selectable = false;
-        meme.scaleToWidth(contentRect.width);
         meme.top = contentRect.top;
         meme.left = contentRect.left;
-        meme.height = (contentRect.height / widthRelation) + 4
-        canvas.add(meme)
+
+        let clipRect = new fabric.Rect({
+            left: contentRect.left,
+            top: contentRect.top,
+            width: contentRect.width,
+            height: contentRect.height,
+            absolutePositioned: true
+        });
+
+        switch ($('#scale-direction').find(":selected").attr('value')) {
+            case 'width':
+                meme.scaleToWidth(contentRect.width);
+                break;
+            case 'height':
+                meme.scaleToHeight(contentRect.height);
+                break;
+            default:
+                console.log("error")
+        }
+        meme.clipPath = clipRect;
+        canvas.add(meme);
+        canvas.sendToBack();
+        canvas.centerObjectH(meme);
     }, {
         crossOrigin: "anonymous"
     });

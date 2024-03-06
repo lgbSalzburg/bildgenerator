@@ -83,6 +83,15 @@
                         </span>
                     </div>
                     <div class="form-group">
+                        <label for="canvas-template">Bild anpassen an:</label>
+                        <span class="input-group-append">
+                            <select class="form-control text-method" name="scale-direction" id="scale-direction">
+                                <option value="height">Höhe</option>
+                                <option value="width">Breite</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="form-group">
                         <label for="text">Text: </label>
                         <div class="input-group cp" id="cp-text">
                             <textarea class="form-control text-method" id="text" placeholder="Type your text here"
@@ -149,8 +158,8 @@
                     <label for="font-size">Qualität: </label>
                     <p>Nur bei JPEG Format relevant</p>
                     <select class="form-control text-method" name="image-quality" id="image-quality">
-                        <option value="0.5">Normal</option>
                         <option value="1.0">Groß</option>
+                        <option value="0.5">Mittel</option>
                         <option value="0.1">Klein</option>
                     </select>
                 </div>
