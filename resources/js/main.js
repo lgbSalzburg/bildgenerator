@@ -84,22 +84,39 @@ function replaceCanvas() {
 function enablePictureMove() {
     canvas.on('object:moving', function (options) {
         if (options.target === contentImage) {
-            if (options.target.top > contentRect.top) {
+
+            maxTop = contentImage.top - contentRect.top - contentRect.height
+            imageRelation = (contentRect.width / contentImage.width)
+            imageRelatedHeight = options.target.height * imageRelation
+
+            maxLeft = contentImage.left - contentRect.left - contentRect.width
+            imageRelatedWidth = options.target.width * (contentRect.height / contentImage.height)
+
+            if (options.target.top > contentRect.to ** imageRelatedHeight > contentRect.height) {
                 options.target.set({
                     top: contentRect.top,
                 }).setCoords();
             }
 
-            maxTop = contentImage.top - contentRect.top - contentRect.height
-            imageRelatedSize = options.target.height * (contentRect.width / contentImage.width)
-
-            if (imageRelatedSize > contentRect.height && imageRelatedSize < maxTop * -1) {
-                console.log("Lower Snap")
-                console.log(maxTop)
+            if (options.target.left > contentRect.left && imageRelatedWidth > contentRect.width) {
                 options.target.set({
-                    top: contentRect.height - imageRelatedSize + contentRect.top,
+                    left: contentRect.left,
                 }).setCoords();
             }
+
+            if (imageRelatedHeight > contentRect.height && imageRelatedHeight < maxTop * -1) {
+                options.target.set({
+                    top: contentRect.height - imageRelatedHeight + contentRect.top,
+                }).setCoords();
+            }
+
+            if (imageRelatedWidth > contentRect.width && imageRelatedWidth < maxLeft * -1) {
+                options.target.set({
+                    left: contentRect.width - imageRelatedWidth + contentRect.left,
+                }).setCoords();
+            }
+
+
         }
     });
 }
@@ -245,7 +262,7 @@ function processMeme(memeInfo) {
                 break;
             case 'height':
                 meme.scaleToHeight(contentRect.height);
-                meme.selectable = false;
+                meme.lockMovementY = true;
                 break;
             default:
                 console.log("error")
