@@ -86,7 +86,7 @@ function replaceCanvas() {
     enableSnap();
     enablePictureMove();
 
-    fabric.Image.fromURL("/resources/images/gruene_logo.svg", function (image) {
+    fabric.Image.fromURL("./resources/images/gruene_logo.svg", function (image) {
         // if (contentRect.width < contentRect.height) {
             image.scaleToWidth((contentRect.width + contentRect.height) / 10);
         // } else {
