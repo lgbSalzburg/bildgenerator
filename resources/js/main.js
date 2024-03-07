@@ -87,14 +87,21 @@ function replaceCanvas() {
     enablePictureMove();
 
     fabric.Image.fromURL("./resources/images/gruene_logo.svg", function (image) {
-        // if (contentRect.width < contentRect.height) {
-            image.scaleToWidth((contentRect.width + contentRect.height) / 10);
-        // } else {
-        //     image.scaleToHeight(contentRect.height / 5);
-        // }
+        image.scaleToWidth((contentRect.width + contentRect.height) / 10);
         image.lockMovementX = true;
         image.lockMovementY = true;
         image.top = canvas.height * logoTop;
+        image.setControlsVisibility({
+            mt: false, // middle top disable
+            mb: false, // midle bottom
+            ml: false, // middle left
+            mr: false, // I think you get it
+            bl: false,
+            br: false,
+            tl: false,
+            tr: false,
+            mtr: false
+        });
         canvas.add(image);
         canvas.centerObjectH(image);
         canvas.bringToFront(image);
