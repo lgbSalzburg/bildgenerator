@@ -13,29 +13,34 @@ function replaceCanvas() {
     var height;
     var topBorderMultiplier = 1;
     var border = 10;
+    var logoTop;
     switch (template) {
         case 'story':
             width = 1080
             height = 1920;
             topBorderMultiplier = 2;
+            logoTop = 0.827;
             break;
         case 'post':
             width = 1080
             height = 1080;
             topBorderMultiplier = 1;
             border = 20;
+            logoTop = 0.787;
             break;
         case 'event':
             width = 1200
             height = 628;
             topBorderMultiplier = 1;
             border = 20;
+            logoTop = 0.678;
             break;
         case 'facebook_header':
             width = 820
             height = 312;
             topBorderMultiplier = 1;
             border = 20;
+            logoTop = 0.588;
             break;
         default:
             console.log("error")
@@ -54,8 +59,9 @@ function replaceCanvas() {
         height: height,
         selection: false,
         allowTouchScrolling: true,
-        objectCaching: false,
-        backgroundColor: "rgba(138, 180, 20)"
+        // objectCaching: false,
+        backgroundColor: "rgba(138, 180, 20)",
+        preserveObjectStacking: true,
     });
 
     $('#scale').attr('max', canvas.width * 0.0025)
@@ -79,21 +85,35 @@ function replaceCanvas() {
     canvas.add(contentRect)
     enableSnap();
     enablePictureMove();
+
+    fabric.Image.fromURL("/resources/images/gruene_logo.svg", function (image) {
+        // if (contentRect.width < contentRect.height) {
+            image.scaleToWidth((contentRect.width + contentRect.height) / 10);
+        // } else {
+        //     image.scaleToHeight(contentRect.height / 5);
+        // }
+        image.lockMovementX = true;
+        image.lockMovementY = true;
+        image.top = canvas.height * logoTop;
+        canvas.add(image);
+        canvas.centerObjectH(image);
+        canvas.bringToFront(image);
+    });
 }
 
 function enablePictureMove() {
     canvas.on('object:moving', function (options) {
         if (options.target === contentImage) {
 
-            
+
             // Relation between uploaded picture and canvas rect as image width/height are unscaled in calculations
             imageRelatedHeight = options.target.height * (contentRect.width / contentImage.width)
             imageRelatedWidth = options.target.width * (contentRect.height / contentImage.height)
-            
+
             // Max top and left minus values before images are snapped
             maxTop = contentImage.top - contentRect.top - contentRect.height
             maxLeft = contentImage.left - contentRect.left - contentRect.width
-            
+
             // If image is dragged beyond top, but only if its larger than the height snap it to top
             if (options.target.top > contentRect.to ** imageRelatedHeight > contentRect.height) {
                 options.target.set({
@@ -215,7 +235,9 @@ $('#add-image').off('input').on('input', function () {
 })
 
 $('#remove-element').off('click').on('click', function () {
-    canvas.remove(canvas.getActiveObject())
+    if (canvas.getActiveObject() != contentImage) {
+        canvas.remove(canvas.getActiveObject())
+    }
 })
 
 fabric.Object.prototype.set({
@@ -275,14 +297,9 @@ function processMeme(memeInfo) {
         }
         meme.clipPath = clipRect;
         canvas.add(meme);
-        canvas.sendToBack();
+        canvas.sendToBack(meme);
         canvas.centerObjectH(meme);
     }, {
         crossOrigin: "anonymous"
     });
-
-
-
-
-
 }
