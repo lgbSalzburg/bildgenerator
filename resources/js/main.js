@@ -85,25 +85,31 @@ function enablePictureMove() {
     canvas.on('object:moving', function (options) {
         if (options.target === contentImage) {
 
-            maxTop = contentImage.top - contentRect.top - contentRect.height
-            imageRelation = (contentRect.width / contentImage.width)
-            imageRelatedHeight = options.target.height * imageRelation
-
-            maxLeft = contentImage.left - contentRect.left - contentRect.width
+            
+            // Relation between uploaded picture and canvas rect as image width/height are unscaled in calculations
+            imageRelatedHeight = options.target.height * (contentRect.width / contentImage.width)
             imageRelatedWidth = options.target.width * (contentRect.height / contentImage.height)
-
+            
+            // Max top and left minus values before images are snapped
+            maxTop = contentImage.top - contentRect.top - contentRect.height
+            maxLeft = contentImage.left - contentRect.left - contentRect.width
+            
+            // If image is dragged beyond top, but only if its larger than the height snap it to top
             if (options.target.top > contentRect.to ** imageRelatedHeight > contentRect.height) {
                 options.target.set({
                     top: contentRect.top,
                 }).setCoords();
             }
 
+            // If image is dragged beyond left, but only if its wider than the width snap it to left
             if (options.target.left > contentRect.left && imageRelatedWidth > contentRect.width) {
                 options.target.set({
                     left: contentRect.left,
                 }).setCoords();
             }
 
+            // Snap images to Max Top/Left if they get dragged to top or left so the image wouldn't fit anymore
+            // First if check is so they aren't triggered accidentally when dragging in the other direction
             if (imageRelatedHeight > contentRect.height && imageRelatedHeight < maxTop * -1) {
                 options.target.set({
                     top: contentRect.height - imageRelatedHeight + contentRect.top,
