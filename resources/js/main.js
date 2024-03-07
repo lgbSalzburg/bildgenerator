@@ -25,6 +25,18 @@ function replaceCanvas() {
             topBorderMultiplier = 1;
             border = 20;
             break;
+        case 'event':
+            width = 1200
+            height = 628;
+            topBorderMultiplier = 1;
+            border = 20;
+            break;
+        case 'facebook_header':
+            width = 820
+            height = 312;
+            topBorderMultiplier = 1;
+            border = 20;
+            break;
         default:
             console.log("error")
     }
