@@ -93,7 +93,7 @@ function enablePictureMove() {
             maxTop = contentImage.top - contentRect.top - contentRect.height
             imageRelatedSize = options.target.height * (contentRect.width / contentImage.width)
 
-            if (imageRelatedSize < maxTop * -1) {
+            if (imageRelatedSize > contentRect.height && imageRelatedSize < maxTop * -1) {
                 console.log("Lower Snap")
                 console.log(maxTop)
                 options.target.set({
@@ -228,7 +228,7 @@ function processMeme(memeInfo) {
         meme.selectable = true;
         meme.top = contentRect.top;
         meme.left = contentRect.left;
-        meme.lockMovementX = true;
+
 
         let clipRect = new fabric.Rect({
             left: contentRect.left,
@@ -241,9 +241,11 @@ function processMeme(memeInfo) {
         switch ($('#scale-direction').find(":selected").attr('value')) {
             case 'width':
                 meme.scaleToWidth(contentRect.width);
+                meme.lockMovementX = true;
                 break;
             case 'height':
                 meme.scaleToHeight(contentRect.height);
+                meme.selectable = false;
                 break;
             default:
                 console.log("error")
