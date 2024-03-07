@@ -78,7 +78,30 @@ function replaceCanvas() {
 
     canvas.add(contentRect)
     enableSnap();
+    enablePictureMove();
+}
 
+function enablePictureMove() {
+    canvas.on('object:moving', function (options) {
+        if (options.target === contentImage) {
+            if (options.target.top > contentRect.top) {
+                options.target.set({
+                    top: contentRect.top,
+                }).setCoords();
+            }
+
+            maxTop = contentImage.top - contentRect.top - contentRect.height
+            imageRelatedSize = options.target.height * (contentRect.width / contentImage.width)
+
+            if (imageRelatedSize < maxTop * -1) {
+                console.log("Lower Snap")
+                console.log(maxTop)
+                options.target.set({
+                    top: contentRect.height - imageRelatedSize + contentRect.top,
+                }).setCoords();
+            }
+        }
+    });
 }
 
 function enableSnap() {
@@ -202,9 +225,10 @@ function processMeme(memeInfo) {
         widthRelation = contentRect.width / meme.width
         originalHeight = meme.height;
         contentImage = meme;
-        meme.selectable = false;
+        meme.selectable = true;
         meme.top = contentRect.top;
         meme.left = contentRect.left;
+        meme.lockMovementX = true;
 
         let clipRect = new fabric.Rect({
             left: contentRect.left,
