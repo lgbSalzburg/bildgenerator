@@ -91,17 +91,7 @@ function replaceCanvas() {
         image.lockMovementX = true;
         image.lockMovementY = true;
         image.top = canvas.height * logoTop;
-        image.setControlsVisibility({
-            mt: false, // middle top disable
-            mb: false, // midle bottom
-            ml: false, // middle left
-            mr: false, // I think you get it
-            bl: false,
-            br: false,
-            tl: false,
-            tr: false,
-            mtr: false
-        });
+        disableScalingControls(image)
         canvas.add(image);
         canvas.centerObjectH(image);
         canvas.bringToFront(image);
@@ -151,6 +141,20 @@ function enablePictureMove() {
 
 
         }
+    });
+}
+
+function disableScalingControls(object) {
+    object.setControlsVisibility({
+        mt: false, // middle top disable
+        mb: false, // midle bottom
+        ml: false, // middle left
+        mr: false, // I think you get it
+        bl: false,
+        br: false,
+        tl: false,
+        tr: false,
+        mtr: false
     });
 }
 
@@ -280,6 +284,7 @@ function processMeme(memeInfo) {
         meme.selectable = true;
         meme.top = contentRect.top;
         meme.left = contentRect.left;
+        disableScalingControls(meme);
 
 
         let clipRect = new fabric.Rect({
