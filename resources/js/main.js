@@ -19,14 +19,14 @@ function replaceCanvas() {
             width = 1080
             height = 1920;
             topBorderMultiplier = 2;
-            logoTop = 0.827;
+            logoTop = 0.829;
             break;
         case 'post':
             width = 1080
             height = 1080;
             topBorderMultiplier = 1;
             border = 20;
-            logoTop = 0.787;
+            logoTop = 0.789;
             break;
         case 'event':
             width = 1200
@@ -40,7 +40,7 @@ function replaceCanvas() {
             height = 312;
             topBorderMultiplier = 1;
             border = 20;
-            logoTop = 0.588;
+            logoTop = 0.590;
             break;
         default:
             console.log("error")
@@ -86,7 +86,7 @@ function replaceCanvas() {
     enableSnap();
     enablePictureMove();
 
-    fabric.Image.fromURL("resources/images/gruene-logo.svg", function (image) {
+    fabric.Image.fromURL("resources/images/logos/gruene-bund.png", function (image) {
         image.scaleToWidth((contentRect.width + contentRect.height) / 10);
         image.lockMovementX = true;
         image.lockMovementY = true;
