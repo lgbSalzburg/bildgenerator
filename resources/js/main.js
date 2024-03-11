@@ -3,48 +3,53 @@ var canvas;
 
 var contentRect;
 var contentImage;
+var logo;
+
+var template_values =  {
+    story:{
+        width: 1080,
+        height: 1920,
+        topBorderMultiplier: 2,
+        border: 10,
+        logoTop: 0.830,
+    },
+    post:{
+        width: 1080,
+        height: 1080,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.789,
+    }
+    ,event:{
+        width: 1200,
+        height: 628,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.678,
+    },
+    facebook_header:{
+        width: 820,
+        height: 312,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.590,
+    }
+}
+
+function currentTemplate(){
+    return template_values[$('#canvas-template').find(":selected").attr('value')]
+}
 
 function replaceCanvas() {
     template = $('#canvas-template').find(":selected").attr('value')
     if (canvas != null) {
         canvas.dispose();
     }
-    var width;
-    var height;
-    var topBorderMultiplier = 1;
-    var border = 10;
-    var logoTop;
-    switch (template) {
-        case 'story':
-            width = 1080
-            height = 1920;
-            topBorderMultiplier = 2;
-            logoTop = 0.829;
-            break;
-        case 'post':
-            width = 1080
-            height = 1080;
-            topBorderMultiplier = 1;
-            border = 20;
-            logoTop = 0.789;
-            break;
-        case 'event':
-            width = 1200
-            height = 628;
-            topBorderMultiplier = 1;
-            border = 20;
-            logoTop = 0.678;
-            break;
-        case 'facebook_header':
-            width = 820
-            height = 312;
-            topBorderMultiplier = 1;
-            border = 20;
-            logoTop = 0.590;
-            break;
-        default:
-            console.log("error")
-    }
+    current_template = currentTemplate();
+    var width = current_template.width;
+    var height = current_template.height;
+    var topBorderMultiplier = current_template.topBorderMultiplier;
+    var border = current_template.border;
 
     $(window).resize(resizeCanvas)
     function resizeCanvas() {
@@ -85,16 +90,23 @@ function replaceCanvas() {
     canvas.add(contentRect)
     enableSnap();
     enablePictureMove();
+    addLogo();
+}
 
-    fabric.Image.fromURL("resources/images/logos/gruene-bund.png", function (image) {
+function addLogo(){
+    if (logo != null) {
+        canvas.remove(logo);
+    }
+    fabric.Image.fromURL("resources/images/logos/" + $('#logo-selection').find(":selected").attr('value'), function (image) {
         image.scaleToWidth((contentRect.width + contentRect.height) / 10);
         image.lockMovementX = true;
         image.lockMovementY = true;
-        image.top = canvas.height * logoTop;
+        image.top = canvas.height * currentTemplate().logoTop;
         disableScalingControls(image)
         canvas.add(image);
         canvas.centerObjectH(image);
         canvas.bringToFront(image);
+        logo = image;
     });
 }
 
@@ -177,6 +189,11 @@ replaceCanvas();
 $('#canvas-template').off('change').on('change', function () {
     $('#canvas-template').selectpicker('refresh');
     replaceCanvas();
+})
+
+$('#logo-selection').off('change').on('change', function () {
+    $('#canvas-template').selectpicker('refresh');
+    addLogo();
 })
 
 $('#add-text').off('click').on('click', function () {
@@ -315,3 +332,19 @@ function processMeme(memeInfo) {
         crossOrigin: "anonymous"
     });
 }
+
+$.getJSON("resources/images/logos/index/gemeinde-logos.json", function (data) {
+    console.log(data)
+    var items = [];
+    console.log("items")
+    $.each(data, function (index, logo) {
+        console.log(logo)
+        items.push("<option value='gemeinden/" + logo.file + "'>" + logo.name + "</option>");
+    });
+
+    // <option value="gruene">Grüne Bund</option>
+    console.log(items);
+    $("#logo-selection").append('<optgroup label="Gemeinden">' + items.join("") + '</optgroup>');
+    $('#logo-selection').selectpicker('refresh');
+    console.log('finished');
+});
