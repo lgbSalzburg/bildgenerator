@@ -5,38 +5,80 @@ var contentRect;
 var contentImage;
 var logo;
 
-var template_values =  {
-    story:{
+var template_values = {
+    story: {
         width: 1080,
         height: 1920,
         topBorderMultiplier: 2,
         border: 10,
         logoTop: 0.830,
     },
-    post:{
+    post: {
         width: 1080,
         height: 1080,
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.789,
     }
-    ,event:{
+    , event: {
         width: 1200,
         height: 628,
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.678,
     },
-    facebook_header:{
+    facebook_header: {
         width: 820,
         height: 312,
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.590,
+    },
+    a3: {
+        width: 3508,
+        height: 4961,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.823,
+    },
+    a3_quer: {
+        width: 4961,
+        height: 3508,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.739,
+    },
+    a4: {
+        width: 2480,
+        height: 3508,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.823,
+    },
+    a4_quer: {
+        width: 3508,
+        height: 2480,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.739,
+    },
+    a5: {
+        width: 1748,
+        height: 2480,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.823,
+    },
+    a5_quer: {
+        width: 2480,
+        height: 1748,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.739,
     }
 }
 
-function currentTemplate(){
+function currentTemplate() {
     return template_values[$('#canvas-template').find(":selected").attr('value')]
 }
 
@@ -93,7 +135,7 @@ function replaceCanvas() {
     addLogo();
 }
 
-function addLogo(){
+function addLogo() {
     if (logo != null) {
         canvas.remove(logo);
     }
@@ -192,7 +234,7 @@ $('#canvas-template').off('change').on('change', function () {
 })
 
 $('#logo-selection').off('change').on('change', function () {
-    $('#canvas-template').selectpicker('refresh');
+    $('#logo-selection').selectpicker('refresh');
     addLogo();
 })
 
