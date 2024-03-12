@@ -143,7 +143,7 @@ function addLogo() {
     scaleTo = (contentRect.width + contentRect.height) / 10
     logoFilename = $('#logo-selection').find(":selected").attr('value')
     if (scaleTo < 121) {
-        logoFilename = logoFilename.replace('245', '120').replace('248', '121')
+        logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268','131')
     }
 
     fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
@@ -406,6 +406,6 @@ function addLogoSelection(groupName, groupNameOptGroup){
 
 addLogoSelection('bundeslaender', 'Bundesländer')
 addLogoSelection('domains', 'Domains')
-addLogoSelection('gemeinden', 'Gemeinden')
+addLogoSelection('gemeinden', 'Gemeinden & Bezirke')
 
 
