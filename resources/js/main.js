@@ -222,7 +222,7 @@ function disableScalingControls(object) {
 }
 
 function enableSnap() {
-    var snapZone = 20;
+    var snapZone = canvas.width / 20;
     canvas.on('object:moving', function (options) {
         var objectWidth = options.target.getBoundingRect().width
         var objectMiddle = options.target.left + objectWidth / 2;
