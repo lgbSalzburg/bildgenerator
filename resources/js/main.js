@@ -32,7 +32,7 @@ var template_values = {
         height: 312,
         topBorderMultiplier: 1,
         border: 20,
-        logoTop: 0.590,
+        logoTop: 0.6,
     },
     a3: {
         width: 3508,
@@ -139,8 +139,18 @@ function addLogo() {
     if (logo != null) {
         canvas.remove(logo);
     }
-    fabric.Image.fromURL("resources/images/logos/" + $('#logo-selection').find(":selected").attr('value'), function (image) {
-        image.scaleToWidth((contentRect.width + contentRect.height) / 10);
+
+    scaleTo = (contentRect.width + contentRect.height) / 10
+    logoFilename = $('#logo-selection').find(":selected").attr('value')
+    console.log(scaleTo)
+    console.log(logoFilename)
+    if (scaleTo < 121) {
+        logoFilename = logoFilename.replace('245', '120').replace('248', '121')
+    }
+    console.log(logoFilename)
+
+    fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
+        image.scaleToWidth(scaleTo);
         image.lockMovementX = true;
         image.lockMovementY = true;
         image.top = canvas.height * currentTemplate().logoTop;
@@ -375,18 +385,20 @@ function processMeme(memeInfo) {
     });
 }
 
-$.getJSON("resources/images/logos/index/gemeinde-logos.json", function (data) {
-    console.log(data)
-    var items = [];
-    console.log("items")
-    $.each(data, function (index, logo) {
-        console.log(logo)
-        items.push("<option value='gemeinden/" + logo.file + "'>" + logo.name + "</option>");
+function addLogoSelection(groupName, groupNameOptGroup){
+    $.getJSON("resources/images/logos/index/" + groupName + "-logos.json", function (data) {
+        var items = [];
+        $.each(data, function (index, logo) {
+            items.push("<option value=" + groupName + "/" + logo.file + ">" + logo.name + "</option>");
+        });
+    
+        $("#logo-selection").append('<optgroup label="' + groupNameOptGroup + '">' + items.join("") + '</optgroup>');
+        $('#logo-selection').selectpicker('refresh');
     });
+}
 
-    // <option value="gruene">Grüne Bund</option>
-    console.log(items);
-    $("#logo-selection").append('<optgroup label="Gemeinden">' + items.join("") + '</optgroup>');
-    $('#logo-selection').selectpicker('refresh');
-    console.log('finished');
-});
+addLogoSelection('bundeslaender', 'Bundesländer')
+addLogoSelection('domains', 'Domains')
+addLogoSelection('gemeinden', 'Gemeinden')
+
+
