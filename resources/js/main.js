@@ -142,12 +142,9 @@ function addLogo() {
 
     scaleTo = (contentRect.width + contentRect.height) / 10
     logoFilename = $('#logo-selection').find(":selected").attr('value')
-    console.log(scaleTo)
-    console.log(logoFilename)
     if (scaleTo < 121) {
         logoFilename = logoFilename.replace('245', '120').replace('248', '121')
     }
-    console.log(logoFilename)
 
     fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
         image.scaleToWidth(scaleTo);
@@ -165,8 +162,6 @@ function addLogo() {
 function enablePictureMove() {
     canvas.on('object:moving', function (options) {
         if (options.target === contentImage) {
-            console.log('Moving')
-
 
             // Relation between uploaded picture and canvas rect as image width/height are unscaled in calculations
             imageRelatedHeight = options.target.height * (contentRect.width / contentImage.width)
@@ -261,16 +256,15 @@ $('#add-text').off('click').on('click', function () {
     // Create new text object
     var text = new fabric.Text($('#text').val(), {
         top: 200,
-        minWidth: canvas.width,
-        fontFamily: $('#font-family').find(":selected").attr('value'),
-        fontSize: parseInt($('#font-size').val()),
+        fontFamily: "Gotham Narrow", //$('#font-family').find(":selected").attr('value'),
+        fontSize: canvas.width/2,
         fontStyle: 'normal',
         textAlign: 'center',
         fill: $('#text-color').find(":selected").attr('value'),
         stroke: '#000000',
-        strokeWidth: parseInt($('#stroke-width').val()),
-        shadow: createShadow('#000000', $('#shadow-depth').val()),
-        objectCaching: false
+        strokeWidth: 0,
+        shadow: '#000000 0px 0px 3px',
+        objectCaching: false,
     })
 
     text.scaleToWidth(canvas.width / 3)
@@ -279,7 +273,6 @@ $('#add-text').off('click').on('click', function () {
     canvas.add(text).setActiveObject(text);
     loadFont(text.fontFamily);
     canvas.centerObject(text);
-
 })
 
 $('#generate-meme').off('click').on('click', function () {
@@ -361,7 +354,6 @@ function positionBackgroundImage(){
     if (contentImage != null) {
         canvas.remove(contentRect);
         canvas.remove(contentImage);
-        console.log(contentImage)
         widthRelation = contentRect.width / contentImage.width
         originalHeight = contentImage.height;
         contentImage = contentImage;
@@ -378,7 +370,6 @@ function positionBackgroundImage(){
             height: contentRect.height,
             absolutePositioned: true
         });
-        console.log(clipRect)
 
         switch ($('#scale-direction').find(":selected").attr('value')) {
             case 'width':
@@ -394,12 +385,10 @@ function positionBackgroundImage(){
             default:
                 console.log("error")
         }
-        console.log('Adding Image')
         contentImage.clipPath = clipRect;
         canvas.add(contentImage);
         canvas.sendToBack(contentImage);
         canvas.centerObjectH(contentImage);
-        console.log('Done')
     }
 }
 

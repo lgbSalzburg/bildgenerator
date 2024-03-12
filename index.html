@@ -120,16 +120,10 @@
                         <div class="input-group cp" id="cp-text">
                             <textarea class="form-control text-method" id="text" placeholder="Type your text here"
                                 rows="2"></textarea>
-                            <span class="input-group-append">
-                                <select class="form-control text-method" name="text-color" id="text-color">
-                                    <option value="rgb(255,240,0)">Gelb</option>
-                                    <option value="rgb(255,255,255)">Weiß</option>
-                                </select>
-                            </span>
                         </div>
                     </div>
                     <div class="form-group form-row mb-0">
-                        <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
+                        <!-- <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
                             <label for="font-size">Schriftart: </label>
                             <select class="form-control text-method" name="font-family" id="font-family">
                                 <option value="Gotham Narrow">Gotham Narrow</option>
@@ -145,14 +139,25 @@
                                 <input class="form-control text-method" type="number" value="0" id="stroke-width"
                                     min="0" max="20" placeholder="0">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
+                            <label for="font-size">Schriftfarbe: </label>
+                            <div class="input-group cp cp-black" id="cp-shadow">
+                                <span class="input-group-append">
+                                    <select class="form-control text-method" name="text-color" id="text-color">
+                                        <option value="rgb(255,240,0)">Gelb</option>
+                                        <option value="rgb(255,255,255)">Weiß</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
                             <label for="font-size">Schatten: </label>
                             <div class="input-group cp cp-black" id="cp-shadow">
                                 <input class="form-control text-method" type="number" value="3" id="shadow-depth"
                                     min="0" max="20" placeholder="0">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="form-group mb-4">
                         <label for="opacity">Opacity:</label>
