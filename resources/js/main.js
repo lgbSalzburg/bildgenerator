@@ -165,6 +165,7 @@ function addLogo() {
 function enablePictureMove() {
     canvas.on('object:moving', function (options) {
         if (options.target === contentImage) {
+            console.log('Moving')
 
 
             // Relation between uploaded picture and canvas rect as image width/height are unscaled in calculations
@@ -176,7 +177,7 @@ function enablePictureMove() {
             maxLeft = contentImage.left - contentRect.left - contentRect.width
 
             // If image is dragged beyond top, but only if its larger than the height snap it to top
-            if (options.target.top > contentRect.to ** imageRelatedHeight > contentRect.height) {
+            if (options.target.top > contentRect.top && imageRelatedHeight > contentRect.height) {
                 options.target.set({
                     top: contentRect.top,
                 }).setCoords();
@@ -202,8 +203,6 @@ function enablePictureMove() {
                     left: contentRect.width - imageRelatedWidth + contentRect.left,
                 }).setCoords();
             }
-
-
         }
     });
 }
@@ -246,6 +245,11 @@ $('#canvas-template').off('change').on('change', function () {
 $('#logo-selection').off('change').on('change', function () {
     $('#logo-selection').selectpicker('refresh');
     addLogo();
+})
+
+$('#scale-direction').off('change').on('change', function () {
+    $('#scale-direction').selectpicker('refresh');
+    positionBackgroundImage();
 })
 
 $('#add-text').off('click').on('click', function () {
@@ -341,19 +345,30 @@ canvas.on({
 })
 
 function processMeme(memeInfo) {
-    canvas.remove(contentRect);
-    if (contentImage != null) {
-        canvas.remove(contentImage);
-    }
     // Add meme template as canvas background
     fabric.Image.fromURL(`${memeInfo.url}`, function (meme) {
-        widthRelation = contentRect.width / meme.width
-        originalHeight = meme.height;
+        if (contentImage != null) {
+            canvas.remove(contentImage);
+        }    
         contentImage = meme;
-        meme.selectable = true;
-        meme.top = contentRect.top;
-        meme.left = contentRect.left;
-        disableScalingControls(meme);
+        positionBackgroundImage();
+    }, {
+        crossOrigin: "anonymous"
+    });
+}
+
+function positionBackgroundImage(){
+    if (contentImage != null) {
+        canvas.remove(contentRect);
+        canvas.remove(contentImage);
+        console.log(contentImage)
+        widthRelation = contentRect.width / contentImage.width
+        originalHeight = contentImage.height;
+        contentImage = contentImage;
+        contentImage.selectable = true;
+        contentImage.top = contentRect.top;
+        contentImage.left = contentRect.left;
+        disableScalingControls(contentImage);
 
 
         let clipRect = new fabric.Rect({
@@ -363,26 +378,29 @@ function processMeme(memeInfo) {
             height: contentRect.height,
             absolutePositioned: true
         });
+        console.log(clipRect)
 
         switch ($('#scale-direction').find(":selected").attr('value')) {
             case 'width':
-                meme.scaleToWidth(contentRect.width);
-                meme.lockMovementX = true;
+                contentImage.scaleToWidth(contentRect.width);
+                contentImage.lockMovementX = true;
+                contentImage.lockMovementY = false;
                 break;
             case 'height':
-                meme.scaleToHeight(contentRect.height);
-                meme.lockMovementY = true;
+                contentImage.scaleToHeight(contentRect.height);
+                contentImage.lockMovementY = true;
+                contentImage.lockMovementX = false;
                 break;
             default:
                 console.log("error")
         }
-        meme.clipPath = clipRect;
-        canvas.add(meme);
-        canvas.sendToBack(meme);
-        canvas.centerObjectH(meme);
-    }, {
-        crossOrigin: "anonymous"
-    });
+        console.log('Adding Image')
+        contentImage.clipPath = clipRect;
+        canvas.add(contentImage);
+        canvas.sendToBack(contentImage);
+        canvas.centerObjectH(contentImage);
+        console.log('Done')
+    }
 }
 
 function addLogoSelection(groupName, groupNameOptGroup){

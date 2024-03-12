@@ -31,9 +31,6 @@ function updateInputs() {
         $('#stroke-width').val(activeObject.strokeWidth)
         $('#shadow-depth').val(activeObject.shadow.blur)
         $('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
-    } else {
-        // Disable text methods when select an image
-        disableTextMethods()
     }
 
     $('#opacity').val(parseInt(activeObject.opacity * 100))
