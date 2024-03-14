@@ -259,7 +259,7 @@ $('#add-text').off('click').on('click', function () {
         fontFamily: "Gotham Narrow", //$('#font-family').find(":selected").attr('value'),
         fontSize: canvas.width/2,
         fontStyle: 'normal',
-        textAlign: 'center',
+        textAlign: $('input[name="align"]:checked').val(),
         fill: $('#text-color').find(":selected").attr('value'),
         stroke: '#000000',
         strokeWidth: 0,
