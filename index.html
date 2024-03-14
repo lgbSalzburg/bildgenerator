@@ -65,21 +65,23 @@
 
     <div class="container edit-section">
         <div class="row">
+            <div class="col">
+                <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem größeren Bildschirm bearbeiten.</p>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
-                <div class="d-lg-none d-md-none">
-                    <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem größeren Bildschirm bearbeiten.</p>
-                </div>
                 <div class="meme-preview">
                     <div class="fabric-canvas-wrapper"><canvas id="meme-canvas"></canvas></div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="edit-methods">
-                    <div class="form-group d-lg-none d-md-none">
-                        <label for="scale">Scale:</label>
-                        <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01">
-                    </div>
-                    <div class="form-group">
+                <div class="form-group d-lg-none d-md-none">
+                    <label for="scale">Scale:</label>
+                    <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01">
+                </div>
+                <div class="row">
+                    <div class="col">
                         <label for="canvas-template">Vorlage:</label>
                         <span class="input-group-append">
                             <select class="form-control text-method" name="canvas-template" id="canvas-template">
@@ -96,7 +98,7 @@
                             </select>
                         </span>
                     </div>
-                    <div class="form-group">
+                    <div class="col">
                         <label for="logo">Logo für:</label>
                         <span class="input-group-append">
                             <select class="form-control text-method" name="logo-selection" id="logo-selection">
@@ -106,41 +108,25 @@
                             </select>
                         </span>
                     </div>
-                    <div class="form-group">
-                        <label for="canvas-template">Bild anpassen an:</label>
-                        <span class="input-group-append">
-                            <select class="form-control text-method" name="scale-direction" id="scale-direction">
-                                <option value="height">Höhe</option>
-                                <option value="width">Breite</option>
-                            </select>
-                        </span>
+                </div>
+                <div class="form-group">
+                    <label for="canvas-template">Hintergrundbild anpassen an:</label>
+                    <span class="input-group-append">
+                        <select class="form-control text-method" name="scale-direction" id="scale-direction">
+                            <option value="height">Höhe</option>
+                            <option value="width">Breite</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="text">Text: </label>
+                    <div class="input-group cp" id="cp-text">
+                        <textarea class="form-control text-method" id="text" placeholder="Type your text here"
+                            rows="2"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="text">Text: </label>
-                        <div class="input-group cp" id="cp-text">
-                            <textarea class="form-control text-method" id="text" placeholder="Type your text here"
-                                rows="2"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group form-row mb-0">
-                        <!-- <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
-                            <label for="font-size">Schriftart: </label>
-                            <select class="form-control text-method" name="font-family" id="font-family">
-                                <option value="Gotham Narrow">Gotham Narrow</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-5 col-sm-6 col-md-5 col-lg-3">
-                            <label for="font-size">Größe: </label>
-                            <input class="form-control text-method" type="number" value="150" id="font-size">
-                        </div>
-                        <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
-                            <label for="font-size">Linie: </label>
-                            <div class="input-group" id="cp-stroke">
-                                <input class="form-control text-method" type="number" value="0" id="stroke-width"
-                                    min="0" max="20" placeholder="0">
-                            </div>
-                        </div> -->
-                        <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
+                </div>
+                    <div class="row mb-3">
+                        <div class="col">
                             <label for="font-size">Schriftfarbe: </label>
                             <div class="input-group cp cp-black" id="cp-shadow">
                                 <span class="input-group-append">
@@ -151,57 +137,43 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="form-group col-6 col-lg-auto">
+                        <div class="col">
                             <label for="font-size">Text Ausrichtung: </label>
                             <div>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-warning active align">
+                                    <label class="btn btn-success active align">
                                         <input type="radio" value="left" name="align" id="left" checked> <i
                                             class="fas fa-align-left"></i>
                                     </label>
-                                    <label class="btn btn-warning align">
+                                    <label class="btn btn-success align">
                                         <input type="radio" value="center" name="align" id="center"> <i
                                             class="fas fa-align-center"></i>
                                     </label>
-                                    <label class="btn btn-warning align">
+                                    <label class="btn btn-success align">
                                         <input type="radio" value="right" name="align" id="right"> <i
                                             class="fas fa-align-right"></i>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group col-4 col-sm-4 col-md-4 col-lg-3">
-                            <label for="font-size">Schatten: </label>
-                            <div class="input-group cp cp-black" id="cp-shadow">
-                                <input class="form-control text-method" type="number" value="3" id="shadow-depth"
-                                    min="0" max="20" placeholder="0">
+                        <div class="col">
+                            <button class="btn btn-success btn-block" id="add-text">Text einfügen</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="">
+                                <input type="file" class="d-none" id="add-image">
+                                <label class="btn btn-success btn-block" for="add-image">Bild einfügen</label>
                             </div>
-                        </div> -->
-                    </div>
-                    <!-- <div class="form-group mb-4">
-                        <label for="opacity">Opacity:</label>
-                        <input type="range" class="form-control-range" id="opacity" min="0" max="100" value="100">
-                    </div> -->
-                    <div class="form-group form-row add-btns pb-3">
-                        <div class="col-auto">
-                            <button class="btn btn-warning" id="add-text">Text einfügen</button>
                         </div>
-                        <div class="col-auto">
-                            <button class="btn btn-warning" id="remove-element">Löschen</button>
+                        <div class="col">
+                            <button class="btn btn-success btn-block" id="add-circle">Kreis Rand an/aus</button>
                         </div>
-                    </div>
-                    <div class="form-group form-row add-btns pb-3">
-                        <div class="custom-file col">
-                            <input type="file" class="custom-file-input d-none" id="add-image">
-                            <label class="btn btn-warning mb-0" for="add-image">Bild einfügen</label>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-warning" id="add-circle">Kreis Rand an/aus</button>
-                        </div>
-                        <div class="form-group">
+                        <div class="col">
                             <label for="circle-radius">Kreis Größe:</label>
-                            <span class="input-group-append">
-                                <select class="form-control text-method" name="circle-radius" id="circle-radius">
+                            <span>
+                                <select class="text-method" name="circle-radius" id="circle-radius">
                                     <option value="2">Groß</option>
                                     <option value="3">Mittel</option>
                                     <option value="4">Klein</option>
@@ -209,26 +181,31 @@
                             </span>
                         </div>
                     </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button class="btn-block btn btn-success" id="remove-element">Text/Bild löschen</button>
+                    </div>
                 </div>
-                <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
-                    <label for="image-format">Download Format: </label>
-                    <select class="form-control text-method" name="image-format" id="image-format">
-                        <option value="jpeg">JPEG</option>
-                        <option value="png">PNG</option>
-                    </select>
-                </div>
-                <div class="form-group col-7 col-sm-6 col-md-7 col-lg-5">
-                    <label for="font-size">Qualität: </label>
-                    <p>Nur bei JPEG Format relevant</p>
-                    <select class="form-control text-method" name="image-quality" id="image-quality">
-                        <option value="1.0">Groß</option>
-                        <option value="0.5">Mittel</option>
-                        <option value="0.1">Klein</option>
-                    </select>
-                </div>
-                <div class="mb-4 mt-3">
-                    <button class="btn btn-success" id="generate-meme">Download</button>
-                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="image-format">Download Format: </label>
+                        <select class="form-control text-method" name="image-format" id="image-format">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="font-size">Qualität(bei JPEG): </label>
+                        <select class="form-control text-method" name="image-quality" id="image-quality">
+                            <option value="1.0">Groß</option>
+                            <option value="0.5">Mittel</option>
+                            <option value="0.1">Klein</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success" id="generate-meme">Download</button>
+                    </div>
+            </div>
             </div>
         </div>
     </div>
