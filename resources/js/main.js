@@ -265,6 +265,7 @@ $('#add-text').off('click').on('click', function () {
         strokeWidth: 0,
         shadow: '#000000 0px 0px 3px',
         objectCaching: false,
+        lineHeight: 0.7,
     })
 
     text.scaleToWidth(canvas.width / 3)
@@ -302,6 +303,7 @@ $('#add-image').off('input').on('input', function () {
             fabric.Image.fromURL(reader.result, function (image) {
                 image.scaleToWidth(canvas.width / 2)
                 canvas.add(image).setActiveObject(image);
+                canvas.centerObject(image)
                 $('#scale').val(image.scaleX)
             }, {
                 opacity: $('#opacity').val()
@@ -316,6 +318,31 @@ $('#remove-element').off('click').on('click', function () {
         canvas.remove(canvas.getActiveObject())
     }
 })
+
+$('#add-circle').off('click').on('click', function () {
+    console.log('ádding circle')
+    $('#circle-radius').selectpicker('refresh');
+    var active_image = canvas.getActiveObject();
+    size = parseInt($('#circle-radius').find(":selected").attr('value'))
+    console.log(size)
+    if (active_image != contentImage) {
+        var radius = Math.min(active_image.height, active_image.width)/size
+        console.log('radius')
+        console.log(radius)
+        var clipPath = new fabric.Circle({
+            radius: radius,
+            top: radius * -1,
+            left: radius * -1
+        });
+        if (active_image.clipPath != null) {
+            active_image.clipPath = null;
+        }else {
+            active_image.clipPath = clipPath;
+        }
+        canvas.renderAll();
+    }
+})
+
 
 fabric.Object.prototype.set({
     transparentCorners: false,
