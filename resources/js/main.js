@@ -219,13 +219,15 @@ function disableScalingControls(object) {
 function enableSnap() {
     var snapZone = canvas.width / 20;
     canvas.on('object:moving', function (options) {
-        var objectWidth = options.target.getBoundingRect().width
-        var objectMiddle = options.target.left + objectWidth / 2;
-        if (objectMiddle > canvas.width / 2 - snapZone &&
-            objectMiddle < canvas.width / 2 + snapZone) {
-            options.target.set({
-                left: canvas.width / 2 - objectWidth / 2,
-            }).setCoords();
+        if (options.target != contentImage){
+            var objectWidth = options.target.getBoundingRect().width
+            var objectMiddle = options.target.left + objectWidth / 2;
+            if (objectMiddle > canvas.width / 2 - snapZone &&
+                objectMiddle < canvas.width / 2 + snapZone) {
+                options.target.set({
+                    left: canvas.width / 2 - objectWidth / 2,
+                }).setCoords();
+            }
         }
     });
 }
