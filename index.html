@@ -11,14 +11,10 @@
     <link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <!-- Main font -->
-    <link href="resources/css/lato-font.css" rel="stylesheet">
     <!-- Fontawesome -->
     <link rel="stylesheet" href="vendors/fontawesome/css/all.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
-    <!-- Color Picker -->
-    <!-- <link rel="stylesheet" href="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.css"> -->
     <!-- Bootstrap select-->
     <link rel="stylesheet" href="vendors/bootstrap-select/bootstrap-select.min.css">
     <!-- Fonts -->
@@ -29,72 +25,61 @@
 
 <body>
     <div class="container col-12">
-        <div class="header mt-4 text-center col-12 col-md-10 col-lg-6 mr-auto ml-auto">
-            <h1 class="text-dark display-5"><img src="resources/images/gruene-logo.svg" width=50 />rüner Bildgenerator
-            </h1>
+        <div class="header row">
+            <div class="col-12 text-center">
+                <h1 class="text-dark display-5"><img src="resources/images/gruene-logo.svg" width=50 />rüner Bildgenerator
+                </h1>
+                <span class="text-muted discription ">
 
-            <span class="text-muted discription">
-                <p>Bild Generator, basierend auf Meme-it. <a href="https://github.com/GrueneAT/bildgenerator"
-                        target="_blank" class="badge badge-dark"><i class="fab fa-github mr-1"></i>GitHub</a></p>
-                <p>Fragen, Wünsche oder Ideen bitte an <a href="mailto:florian.motlik@gruene.at" target="_blank"
-                        class="badge badge-dark">florian.motlik@gruene.at</a></p>
-            </span>
-        </div>
-    </div>
-    <div class="choice-section mt-5">
-        <div class="choice text-center mr-auto ml-auto mb-5">
-            <div class="d-inline-block mb-2">
-                <p class="display-5 mb-0 ">Suche ein Bild aus
-                </p>
-            </div>
-            <div class="form-group input-image mb-0">
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="meme-input">
-                        <label class="custom-file-label mb-0" for="meme-input">Bild aussuchen</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="grid memes-container">
-                <div class="grid-sizer"></div>
-            </div>
+                    <p>Bild Generator, basierend auf Meme-it. <a href="https://github.com/GrueneAT/bildgenerator"
+                            target="_blank" class="badge badge-dark"><i class="fab fa-github mr-1"></i>GitHub</a></p>
+                    <p>Fragen, Wünsche oder Ideen bitte an <a href="mailto:florian.motlik@gruene.at" target="_blank"
+                            class="badge badge-dark">florian.motlik@gruene.at</a></p>
+                    </span>
         </div>
     </div>
 
     <div class="container edit-section">
-        <div class="row">
+        <div class="row d-lg-none d-md-none">
             <div class="col">
                 <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem größeren Bildschirm bearbeiten.</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
+                <div>
+                    <div class="grid memes-container">
+                        <div class="grid-sizer"></div>
+                    </div>
+                </div>
                 <div class="meme-preview">
                     <div class="fabric-canvas-wrapper"><canvas id="meme-canvas"></canvas></div>
                 </div>
-            </div>
-            <div class="col-md-6">
                 <div class="form-group d-lg-none d-md-none">
                     <label for="scale">Scale:</label>
                     <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01">
                 </div>
-                <div class="row">
+            </div>
+            <div class="col-md-6">
+                <div class="row mb-3">
                     <div class="col">
                         <label for="canvas-template">Vorlage:</label>
                         <span class="input-group-append">
                             <select class="form-control text-method" name="canvas-template" id="canvas-template">
-                                <option value="post">Post</option>
-                                <option value="story">Story</option>
-                                <option value="event">Veranstaltung</option>
-                                <option value="facebook_header">Facebook Header</option>
-                                <option value="a3">A3</option>
-                                <option value="a3_quer">A3 Querformat</option>
-                                <option value="a4">A4</option>
-                                <option value="a4_quer">A4 Querformat</option>
-                                <option value="a5">A5</option>
-                                <option value="a5_quer">A5 Querformat</option>
+                                <optgroup label="Social Media">
+                                    <option value="post">Post</option>
+                                    <option value="story">Story</option>
+                                    <option value="event">Veranstaltung</option>
+                                    <option value="facebook_header">Facebook Header</option>
+                                </optgroup>
+                                <optgroup label="Druck">
+                                    <option value="a3">A3</option>
+                                    <option value="a3_quer">A3 Querformat</option>
+                                    <option value="a4">A4</option>
+                                    <option value="a4_quer">A4 Querformat</option>
+                                    <option value="a5">A5</option>
+                                    <option value="a5_quer">A5 Querformat</option>
+                                </optgroup>
                             </select>
                         </span>
                     </div>
@@ -109,14 +94,18 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="canvas-template">Hintergrundbild anpassen an:</label>
-                    <span class="input-group-append">
-                        <select class="form-control text-method" name="scale-direction" id="scale-direction">
-                            <option value="height">Höhe</option>
-                            <option value="width">Breite</option>
-                        </select>
-                    </span>
+                <div class="row">
+                    <div class="col">
+                        <input type="file" class="d-none" id="meme-input">
+                        <label class="btn btn-success btn-block" for="meme-input">Hintergrundbild aussuchen</label>
+                        <label for="canvas-template">Hintergrundbild anpassen an:</label>
+                        <span class="input-group-append">
+                            <select class="form-control text-method" name="scale-direction" id="scale-direction">
+                                <option value="height">Höhe</option>
+                                <option value="width">Breite</option>
+                            </select>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="text">Text: </label>
@@ -156,34 +145,34 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col">
                             <button class="btn btn-success btn-block" id="add-text">Text einfügen</button>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row">
                         <div class="col">
-                            <div class="">
-                                <input type="file" class="d-none" id="add-image">
-                                <label class="btn btn-success btn-block" for="add-image">Bild einfügen</label>
-                            </div>
+                            <input type="file" class="d-none" id="add-image">
+                            <label class="btn btn-success btn-block" for="add-image">Bild einfügen</label>
                         </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col">
                             <button class="btn btn-success btn-block" id="add-circle">Kreis Rand an/aus</button>
                         </div>
                         <div class="col">
-                            <label for="circle-radius">Kreis Größe:</label>
-                            <span>
-                                <select class="text-method" name="circle-radius" id="circle-radius">
-                                    <option value="2">Groß</option>
-                                    <option value="3">Mittel</option>
-                                    <option value="4">Klein</option>
-                                </select>
-                            </span>
+                            <label for="circle-radius" class="d-inline">Kreis Größe:</label>
+                            <select class="d-inline form-inline" name="circle-radius" id="circle-radius">
+                                <option value="2">Groß</option>
+                                <option value="3">Mittel</option>
+                                <option value="4">Klein</option>
+                            </select>
                         </div>
                     </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <button class="btn-block btn btn-success" id="remove-element">Text/Bild löschen</button>
+                        <button class="btn-block btn btn-danger" id="remove-element">Text/Bild löschen</button>
                     </div>
                 </div>
                 <div class="row">
@@ -228,7 +217,7 @@
     <script src="vendors/masonry/masonry.pkgd.min.js"></script>
 
     <script src="vendors/fabric-js/fabric.min.js"></script>
-
+    
     <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
 
     <script src="vendors/fontfaceobserver/fontfaceobserver.standalone.js"></script>
