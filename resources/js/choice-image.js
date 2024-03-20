@@ -35,14 +35,10 @@ $(function () {
                     height: meme.height,
                     width: meme.width,
                 }
-                $('.choice-section').trigger('choice-done', imgInfo)
+                // $('.choice-section').trigger('choice-done', imgInfo)
+                processMeme(imgInfo)
             }
         }
         reader.readAsDataURL(file)
-    })
-
-    // Event: Choice was made
-    $('.choice-section').on('choice-done', function (e, imgInfo) {
-        processMeme(imgInfo)
     })
 })

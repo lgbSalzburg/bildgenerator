@@ -322,15 +322,11 @@ $('#remove-element').off('click').on('click', function () {
 })
 
 $('#add-circle').off('click').on('click', function () {
-    console.log('ádding circle')
     $('#circle-radius').selectpicker('refresh');
     var active_image = canvas.getActiveObject();
     size = parseInt($('#circle-radius').find(":selected").attr('value'))
-    console.log(size)
     if (active_image != contentImage) {
         var radius = Math.min(active_image.height, active_image.width)/size
-        console.log('radius')
-        console.log(radius)
         var clipPath = new fabric.Circle({
             radius: radius,
             top: radius * -1,
