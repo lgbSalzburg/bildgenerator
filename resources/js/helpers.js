@@ -29,7 +29,7 @@ function enableTextMethods() {
 }
 
 function createShadow(color, width) {
-    return `${color} 0px 0px ${width}`
+    return `${color} 2px 2px ${width}`
 }
 
 function setBackgroundColor(color) {

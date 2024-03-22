@@ -143,7 +143,7 @@ function addLogo() {
     scaleTo = (contentRect.width + contentRect.height) / 10
     logoFilename = $('#logo-selection').find(":selected").attr('value')
     if (scaleTo < 121) {
-        logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268','131')
+        logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268', '131')
     }
 
     fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
@@ -219,7 +219,7 @@ function disableScalingControls(object) {
 function enableSnap() {
     var snapZone = canvas.width / 20;
     canvas.on('object:moving', function (options) {
-        if (options.target != contentImage){
+        if (options.target != contentImage) {
             var objectWidth = options.target.getBoundingRect().width
             var objectMiddle = options.target.left + objectWidth / 2;
             if (objectMiddle > canvas.width / 2 - snapZone &&
@@ -259,13 +259,13 @@ $('#add-text').off('click').on('click', function () {
     var text = new fabric.Text($('#text').val(), {
         top: 200,
         fontFamily: "Gotham Narrow", //$('#font-family').find(":selected").attr('value'),
-        fontSize: canvas.width/2,
+        fontSize: canvas.width / 2,
         fontStyle: 'normal',
         textAlign: $('input[name="align"]:checked').val(),
         fill: $('#text-color').find(":selected").attr('value'),
         stroke: '#000000',
         strokeWidth: 0,
-        shadow: '#000000 0px 0px 3px',
+        shadow: createShadow('#000000', $('#shadow-depth').val()),
         objectCaching: false,
         lineHeight: 0.7,
     })
@@ -326,7 +326,7 @@ $('#add-circle').off('click').on('click', function () {
     var active_image = canvas.getActiveObject();
     size = parseInt($('#circle-radius').find(":selected").attr('value'))
     if (active_image != contentImage) {
-        var radius = Math.min(active_image.height, active_image.width)/size
+        var radius = Math.min(active_image.height, active_image.width) / size
         var clipPath = new fabric.Circle({
             radius: radius,
             top: radius * -1,
@@ -334,7 +334,7 @@ $('#add-circle').off('click').on('click', function () {
         });
         if (active_image.clipPath != null) {
             active_image.clipPath = null;
-        }else {
+        } else {
             active_image.clipPath = clipPath;
         }
         canvas.renderAll();
@@ -367,7 +367,7 @@ function processMeme(memeInfo) {
     fabric.Image.fromURL(`${memeInfo.url}`, function (meme) {
         if (contentImage != null) {
             canvas.remove(contentImage);
-        }    
+        }
         contentImage = meme;
         positionBackgroundImage();
     }, {
@@ -375,7 +375,7 @@ function processMeme(memeInfo) {
     });
 }
 
-function positionBackgroundImage(){
+function positionBackgroundImage() {
     if (contentImage != null) {
         canvas.remove(contentRect);
         canvas.remove(contentImage);
@@ -417,13 +417,13 @@ function positionBackgroundImage(){
     }
 }
 
-function addLogoSelection(groupName, groupNameOptGroup){
+function addLogoSelection(groupName, groupNameOptGroup) {
     $.getJSON("resources/images/logos/index/" + groupName + "-logos.json", function (data) {
         var items = [];
         $.each(data, function (index, logo) {
             items.push("<option value=" + groupName + "/" + logo.file + ">" + logo.name + "</option>");
         });
-    
+
         $("#logo-selection").append('<optgroup label="' + groupNameOptGroup + '">' + items.join("") + '</optgroup>');
         $('#logo-selection').selectpicker('refresh');
     });

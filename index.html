@@ -27,7 +27,8 @@
     <div class="container col-12">
         <div class="header row">
             <div class="col-12 text-center">
-                <h1 class="text-dark display-5"><img src="resources/images/gruene-logo.svg" width=50 />rüner Bildgenerator
+                <h1 class="text-dark display-5"><img src="resources/images/gruene-logo.svg" width=50 />rüner
+                    Bildgenerator
                 </h1>
                 <span class="text-muted discription ">
 
@@ -35,14 +36,15 @@
                             target="_blank" class="badge badge-dark"><i class="fab fa-github mr-1"></i>GitHub</a></p>
                     <p>Fragen, Wünsche oder Ideen bitte an <a href="mailto:florian.motlik@gruene.at" target="_blank"
                             class="badge badge-dark">florian.motlik@gruene.at</a></p>
-                    </span>
+                </span>
+            </div>
         </div>
     </div>
-
     <div class="container edit-section">
         <div class="row d-lg-none d-md-none">
             <div class="col">
-                <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem größeren Bildschirm bearbeiten.</p>
+                <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem
+                    größeren Bildschirm bearbeiten.</p>
             </div>
         </div>
         <div class="row">
@@ -65,7 +67,8 @@
                     <div class="col">
                         <label for="canvas-template">Vorlage:</label>
                         <span class="input-group-append">
-                            <select class="form-control text-method" name="canvas-template" id="canvas-template" data-live-search="true">
+                            <select class="form-control text-method" name="canvas-template" id="canvas-template"
+                                data-live-search="true">
                                 <optgroup label="Social Media">
                                     <option value="post">Post</option>
                                     <option value="story">Story</option>
@@ -86,9 +89,10 @@
                     <div class="col">
                         <label for="logo">Logo für:</label>
                         <span class="input-group-append">
-                            <select class="form-control text-method" name="logo-selection" id="logo-selection" data-live-search="true">
+                            <select class="form-control text-method" name="logo-selection" id="logo-selection"
+                                data-live-search="true">
                                 <optgroup label="Allgemein">
-                                <option value="Gruene-AT_Logo_weiss_245_248.png">Grüne.at</option>
+                                    <option value="Gruene-AT_Logo_weiss_245_248.png">Grüne.at</option>
                                 </optgroup>
                             </select>
                         </span>
@@ -114,62 +118,65 @@
                             rows="2"></textarea>
                     </div>
                 </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="font-size">Schriftfarbe: </label>
-                            <div class="input-group cp cp-black" id="cp-shadow">
-                                <span class="input-group-append">
-                                    <select class="form-control text-method" name="text-color" id="text-color">
-                                        <option value="rgb(255,240,0)">Gelb</option>
-                                        <option value="rgb(255,255,255)">Weiß</option>
-                                    </select>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="font-size">Text Ausrichtung: </label>
-                            <div>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-success active align">
-                                        <input type="radio" value="left" name="align" id="left" checked> <i
-                                            class="fas fa-align-left"></i>
-                                    </label>
-                                    <label class="btn btn-success align">
-                                        <input type="radio" value="center" name="align" id="center"> <i
-                                            class="fas fa-align-center"></i>
-                                    </label>
-                                    <label class="btn btn-success align">
-                                        <input type="radio" value="right" name="align" id="right"> <i
-                                            class="fas fa-align-right"></i>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <button class="btn btn-success btn-block" id="add-text">Text einfügen</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="file" class="d-none" id="add-image">
-                            <label class="btn btn-success btn-block" for="add-image">Bild einfügen</label>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <button class="btn btn-success btn-block" id="add-circle">Kreis Rand an/aus</button>
-                        </div>
-                        <div class="col">
-                            <label for="circle-radius" class="d-inline">Kreis Größe:</label>
-                            <select class="d-inline form-inline" name="circle-radius" id="circle-radius">
-                                <option value="2">Groß</option>
-                                <option value="3">Mittel</option>
-                                <option value="4">Klein</option>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="text-color">Schriftfarbe: </label>
+                        <span class="input-group-append">
+                            <select class="form-control text-method" name="text-color" id="text-color">
+                                <option value="rgb(255,240,0)">Gelb</option>
+                                <option value="rgb(255,255,255)">Weiß</option>
                             </select>
+                        </span>
+                    </div>
+                    <div class="col">
+                        <label for="shadow-depth">Schlagschatten: </label>
+                        <input class="form-control text-method" type="number" value="3" id="shadow-depth" min="0"
+                            max="30" placeholder="0">
+                    </div>
+                    <div class="col">
+                        <label>Text Ausrichtung: </label>
+                        <div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-success active align">
+                                    <input type="radio" value="left" name="align" id="left" checked> <i
+                                        class="fas fa-align-left"></i>
+                                </label>
+                                <label class="btn btn-success align">
+                                    <input type="radio" value="center" name="align" id="center"> <i
+                                        class="fas fa-align-center"></i>
+                                </label>
+                                <label class="btn btn-success align">
+                                    <input type="radio" value="right" name="align" id="right"> <i
+                                        class="fas fa-align-right"></i>
+                                </label>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button class="btn btn-success btn-block" id="add-text">Text einfügen</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="file" class="d-none" id="add-image">
+                        <label class="btn btn-success btn-block" for="add-image">Bild einfügen</label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button class="btn btn-success btn-block" id="add-circle">Kreis Rand an/aus</button>
+                    </div>
+                    <div class="col">
+                        <label for="circle-radius" class="d-inline">Kreis Größe:</label>
+                        <select class="d-inline form-inline" name="circle-radius" id="circle-radius">
+                            <option value="2">Groß</option>
+                            <option value="3">Mittel</option>
+                            <option value="4">Klein</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <div class="col">
                         <button class="btn-block btn btn-danger" id="remove-element">Text/Bild löschen</button>
@@ -194,10 +201,9 @@
                     <div class="col">
                         <button class="btn btn-success" id="generate-meme">Download</button>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <div class="col-12 alert-container alert alert-danger" style="display: none;"></div>
@@ -217,7 +223,7 @@
     <script src="vendors/masonry/masonry.pkgd.min.js"></script>
 
     <script src="vendors/fabric-js/fabric.min.js"></script>
-    
+
     <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
 
     <script src="vendors/fontfaceobserver/fontfaceobserver.standalone.js"></script>
