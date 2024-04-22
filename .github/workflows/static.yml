@@ -31,8 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Create Logo JSON files
-        run: make logo-json
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

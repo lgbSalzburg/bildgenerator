@@ -4,6 +4,7 @@ var canvas;
 var contentRect;
 var contentImage;
 var logo;
+var logoName;
 
 var template_values = {
     story: {
@@ -12,6 +13,7 @@ var template_values = {
         topBorderMultiplier: 2,
         border: 10,
         logoTop: 0.830,
+        logoTextTop: 0.9423
     },
     post: {
         width: 1080,
@@ -19,6 +21,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.789,
+        logoTextTop: 0.947
     }
     , event: {
         width: 1200,
@@ -26,6 +29,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.678,
+        logoTextTop: 0.9
     },
     facebook_header: {
         width: 820,
@@ -33,6 +37,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.6,
+        logoTextTop: 0.862
     },
     a3: {
         width: 3508,
@@ -40,6 +45,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.823,
+        logoTextTop: 0.961
     },
     a3_quer: {
         width: 4961,
@@ -47,6 +53,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.739,
+        logoTextTop: 0.927
     },
     a4: {
         width: 2480,
@@ -54,6 +61,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.823,
+        logoTextTop: 0.961
     },
     a4_quer: {
         width: 3508,
@@ -61,6 +69,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.739,
+        logoTextTop: 0.927
     },
     a5: {
         width: 1748,
@@ -68,6 +77,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.823,
+        logoTextTop: 0.961
     },
     a5_quer: {
         width: 2480,
@@ -75,6 +85,7 @@ var template_values = {
         topBorderMultiplier: 1,
         border: 20,
         logoTop: 0.739,
+        logoTextTop: 0.927
     }
 }
 
@@ -138,15 +149,30 @@ function replaceCanvas() {
 function addLogo() {
     if (logo != null) {
         canvas.remove(logo);
+        canvas.remove(logoName)
     }
+    
 
     scaleTo = (contentRect.width + contentRect.height) / 10
-    logoFilename = $('#logo-selection').find(":selected").attr('value')
+    logoText = $('#logo-selection').find(":selected").text().trim().toUpperCase()
+    
+    if (logoText.length < 17) {
+        var logoFilename = "Gruene_Logo_245_248.png"
+        textScaleTo = 6
+    } else {
+        var logoFilename = "Gruene_Logo_245_268.png"
+        console.log(logoText.lastIndexOf(' '))
+        lastSpace = logoText.lastIndexOf(' ')
+        logoText = logoText.substring(0,lastSpace) + '\n' + logoText.substring(lastSpace + 1)
+        textScaleTo = 4.8
+    }
+    console.log(logoText)
+    
     if (scaleTo < 121) {
         logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268', '131')
     }
 
-    fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
+    logo_image = fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
         image.scaleToWidth(scaleTo);
         image.lockMovementX = true;
         image.lockMovementY = true;
@@ -155,7 +181,35 @@ function addLogo() {
         canvas.add(image);
         canvas.centerObjectH(image);
         canvas.bringToFront(image);
+        // canvas.sendToBack(image);
         logo = image;
+
+        logoName = new fabric.Text(logoText, {
+            top: canvas.height * currentTemplate().logoTextTop,
+            fontFamily: "Gotham Narrow",
+            fontSize: Math.floor(image.getScaledWidth()/10),
+            fontStyle: 'normal',
+            textAlign: 'right',
+            fill: 'rgb(255,255,255)',
+            stroke: '#000000',
+            strokeWidth: 0,
+            // shadow: createShadow('#000000', $('#shadow-depth').val()),
+            objectCaching: false,
+            lineHeight: 0.7,
+            angle: -5.5,
+            // charSpacing: 20
+        })
+
+        canvas.add(logoName)
+        console.log(logoName.width)
+        logoName.width = image.getScaledWidth()*0.95
+        console.log(logoName.width)
+        
+        // logoName.scaleToHeight(image.height/textScaleTo)
+    canvas.bringToFront(logoName);
+    // disableScalingControls(logoName)
+    canvas.centerObjectH(logoName);
+    canvas.renderAll()
     });
 }
 
@@ -417,20 +471,19 @@ function positionBackgroundImage() {
     }
 }
 
-function addLogoSelection(groupName, groupNameOptGroup) {
-    $.getJSON("resources/images/logos/index/" + groupName + "-logos.json", function (data) {
-        var items = [];
-        $.each(data, function (index, logo) {
-            items.push("<option value=" + groupName + "/" + logo.file + ">" + logo.name + "</option>");
-        });
-
-        $("#logo-selection").append('<optgroup label="' + groupNameOptGroup + '">' + items.join("") + '</optgroup>');
+function addLogoSelection() {
+    $.getJSON("resources/images/logos/index.json", function (data) {
+        $.each(data, function (index, names) {
+            var items = [];
+            $.each(names.sort(), function (index, name) {
+                items.push("<option>" + name + "</option>");
+            });
+            $("#logo-selection").append('<optgroup label="' + index + '">' + items.join("") + '</optgroup>');
         $('#logo-selection').selectpicker('refresh');
+        });
     });
 }
 
-addLogoSelection('bundeslaender', 'Bundesländer')
-addLogoSelection('domains', 'Domains')
-addLogoSelection('gemeinden', 'Gemeinden & Bezirke')
+addLogoSelection()
 
 

@@ -1,0 +1,45 @@
+{
+    "Bundesländer": [
+        "Burgenland",
+        "Kärnten",
+        "Niederösterreich",
+        "Oberösterreich",
+        "Salzburg",
+        "Steiermark",
+        "Tirol",
+        "Vorarlberg",
+        "Wien"
+    ],
+    "Bezirke": [
+        "Amstetten Bezirk",
+        "Hollabrunn Bezirk",
+        "Melk Bezirk",
+        "St. Pölten Bezirk",
+        "Baden Bezirk",
+        "Horn Bezirk",
+        "Mistelbach Bezirk",
+        "Tulln Bezirk",
+        "Bruck a. d. Leitha Bezirk",
+        "Korneuburg Bezirk",
+        "Mödling Bezirk",
+        "Waidhofen a. d. Thaya Bezirk",
+        "Gänserndorf Bezirk",
+        "Krems Bezirk",
+        "Neunkirchen Bezirk",
+        "Wiener Neustadt Bezirk",
+        "Gmünd Bezirk",
+        "Lilienfeld Bezirk",
+        "Scheibbs Bezirk",
+        "Zwettl Bezirk"
+    ],
+    "Gemeinden": [
+        "Bad Fischau Brunn",
+        "Herzogenburg",
+        "Katzelsdorf",
+        "Markt Piesting",
+        "Wiener Neustadt Bezirk",
+        "Wiener Neustadt",
+        "Woellersdorf Steinabrueckl",
+        "Horn"
+    ]
+}

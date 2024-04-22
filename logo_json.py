@@ -7,6 +7,7 @@ logos = []
 for line in fileinput.input():
     cleanup_line = re.sub('([-_][Gg]ruene)?[-_][Ll]ogo[-_][Ww]eiss(_\d{3}_\d{3})?', '', line).rstrip().replace('-', ' ').replace('gruene', 'grüne')
     name = re.sub('\.[a-z]+$','', cleanup_line)
+    print(name)
     logos.append({'name': name.title(), 'file': line.rstrip()})
 
 names = [l['name'] for l in logos]
