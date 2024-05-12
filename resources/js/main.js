@@ -6,6 +6,10 @@ var contentImage;
 var logo;
 var logoName;
 
+if (typeof generatorApplicationURL == 'undefined'){
+    var generatorApplicationURL = "";
+}
+
 var template_values = {
     story: {
         width: 1080,
@@ -173,7 +177,7 @@ function addLogo() {
         logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268', '131')
     }
 
-    logo_image = fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
+    logo_image = fabric.Image.fromURL(generatorApplicationURL + "resources/images/logos/" + logoFilename, function (image) {
         image.scaleToWidth(scaleTo);
         image.lockMovementX = true;
         image.lockMovementY = true;
@@ -470,7 +474,7 @@ function positionBackgroundImage() {
 }
 
 function addLogoSelection() {
-    $.getJSON("resources/images/logos/index.json", function (data) {
+    $.getJSON(generatorApplicationURL + "resources/images/logos/index.json", function (data) {
         $.each(data, function (index, names) {
             var items = [];
             $.each(names.sort(), function (index, name) {
