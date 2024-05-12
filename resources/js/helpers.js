@@ -9,7 +9,7 @@ function setValue(key, value) {
 
 // Return current background color
 function getBackgroundColor(color) {
-    if ($('#bg-option').hasClass('active')) {
+    if (jQuery('#bg-option').hasClass('active')) {
         return color
     } else {
         return ''
@@ -17,15 +17,15 @@ function getBackgroundColor(color) {
 }
 
 function disableTextMethods() {
-    $('.text-method').attr('disabled', 'disabled')
-    $('#font-family').selectpicker('refresh')
-    $('.align').addClass('disabled')
+    jQuery('.text-method').attr('disabled', 'disabled')
+    jQuery('#font-family').selectpicker('refresh')
+    jQuery('.align').addClass('disabled')
 }
 
 function enableTextMethods() {
-    $('.text-method').attr('disabled', false)
-    $('#font-family').selectpicker('refresh')
-    $('.align').removeClass('disabled')
+    jQuery('.text-method').attr('disabled', false)
+    jQuery('#font-family').selectpicker('refresh')
+    jQuery('.align').removeClass('disabled')
 }
 
 function createShadow(color, width) {
@@ -52,18 +52,18 @@ function createImgName() {
     for (var i = 0; i < 6; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    var format = $('#image-format').find(":selected").attr('value')
+    var format = jQuery('#image-format').find(":selected").attr('value')
     return `${result}.${format}`;
 }
 
 // Show alert message
 function showAlert(message) {
-    $('.alert-container')
+    jQuery('.alert-container')
         .html(`<p class="text-center mb-0"><strong>${message}</strong></p>`)
         .fadeIn('normal', function () {
             setTimeout(function () {
-                $('.alert-container').fadeOut('normal', function () {
-                    $('.alert-container').html('')
+                jQuery('.alert-container').fadeOut('normal', function () {
+                    jQuery('.alert-container').html('')
                 })
             }, 3000)
         })
