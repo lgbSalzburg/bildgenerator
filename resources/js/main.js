@@ -202,14 +202,16 @@ function addLogo() {
             objectCaching: false,
             lineHeight: 0.8,
             angle: -5.5,
-            // selectable: false
+            selectable: false
         })
 
         canvas.add(logoName)
 
         linebreak = logoText.lastIndexOf('\n')
         if (linebreak > 17 || logoText.length - linebreak > 17) {
-            logoName.scaleToWidth(image.getScaledWidth() * 0.97)
+            logoName.scaleToWidth(image.getScaledWidth() * 0.95)
+            topAdd = Math.floor((logoName.height - logoName.getScaledHeight()) / 2)
+            logoName.top = logoName.top + topAdd
         } else {
             logoName.width = image.getScaledWidth() * 0.95
         }
