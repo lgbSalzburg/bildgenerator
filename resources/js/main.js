@@ -187,7 +187,7 @@ function addLogo() {
 
         logoName = new fabric.Text(logoText, {
             top: canvas.height * currentTemplate().logoTextTop,
-            fontFamily: "Gotham Narrow",
+            fontFamily: "Gotham Narrow Bold",
             fontSize: Math.floor(image.getScaledWidth() / 10),
             fontStyle: 'normal',
             textAlign: 'right',
