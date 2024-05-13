@@ -8,12 +8,12 @@ function loadFont(font) {
             text.set("fontFamily", "");
             text.set("fontFamily", font);
             canvas.renderAll();
-            $('#font-family').selectpicker('refresh')
+            jQuery('#font-family').selectpicker('refresh')
         })
     } else {
         text.set("fontFamily", font);
         canvas.renderAll();
-        $('#font-family').selectpicker('refresh')
+        jQuery('#font-family').selectpicker('refresh')
     }
 }
 
@@ -23,28 +23,28 @@ function updateInputs() {
 
     if (activeObject.get('type') == "text") {
         enableTextMethods()
-        $('#text').val(activeObject.text)
-        $('#font-family').val(activeObject.fontFamily).selectpicker('refresh')
-        $('#text-color').val(activeObject.fill).selectpicker('refresh')
-        $('#font-size').val(activeObject.fontSize)
-        $(`input[value="${activeObject.textAlign}"]`).parent().trigger('update-status')
-        $('#stroke-width').val(activeObject.strokeWidth)
-        $('#shadow-depth').val(activeObject.shadow.blur)
-        $('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
+        jQuery('#text').val(activeObject.text)
+        jQuery('#font-family').val(activeObject.fontFamily).selectpicker('refresh')
+        jQuery('#text-color').val(activeObject.fill).selectpicker('refresh')
+        jQuery('#font-size').val(activeObject.fontSize)
+        jQuery(`input[value="${activeObject.textAlign}"]`).parent().trigger('update-status')
+        jQuery('#stroke-width').val(activeObject.strokeWidth)
+        jQuery('#shadow-depth').val(activeObject.shadow.blur)
+        jQuery('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
     }
 
-    $('#opacity').val(parseInt(activeObject.opacity * 100))
-    $('#scale').val(parseFloat(activeObject.scaleX))
+    jQuery('#opacity').val(parseInt(activeObject.opacity * 100))
+    jQuery('#scale').val(parseFloat(activeObject.scaleX))
 }
 
 
 function loadObjectHandlers() {
     // Interactive edit methods with canvas text 
-    $('#text').off('input').on('input', function () {
-        setValue("text", $(this).val())
+    jQuery('#text').off('input').on('input', function () {
+        setValue("text", jQuery(this).val())
     })
 
-    $('#scale').off('input').on('input', function () {
+    jQuery('#scale').off('input').on('input', function () {
         if (canvas.getActiveObject() != null) {
             var activeText = canvas.getActiveObject()
             activeText.scale(parseFloat(this.value)).setCoords();
@@ -53,42 +53,42 @@ function loadObjectHandlers() {
     })
 
 
-    $('#text-color').off('change').on('change', function () {
-        $('#text-color').selectpicker('refresh')
+    jQuery('#text-color').off('change').on('change', function () {
+        jQuery('#text-color').selectpicker('refresh')
         if (canvas.getActiveObject() != null) {
-          setValue("fill", $(this).find(":selected").attr('value'))
+          setValue("fill", jQuery(this).find(":selected").attr('value'))
         }
     })
 
-    $('#font-family').off('change').on('change', function () {
-        $('#font-family').selectpicker('refresh')
+    jQuery('#font-family').off('change').on('change', function () {
+        jQuery('#font-family').selectpicker('refresh')
         if (canvas.getActiveObject() != null) {
-            loadFont($(this).find(":selected").attr('value'))
+            loadFont(jQuery(this).find(":selected").attr('value'))
         }
     })
 
-    $('#font-size').off('input').on('input', function () {
-        setValue("fontSize", $(this).val())
+    jQuery('#font-size').off('input').on('input', function () {
+        setValue("fontSize", jQuery(this).val())
     })
 
-    $('input[name="align"]').off('change').on('change', function () {
-        setValue("textAlign", $(this).attr('id'))
+    jQuery('input[name="align"]').off('change').on('change', function () {
+        setValue("textAlign", jQuery(this).attr('id'))
     })
 
-    $('#stroke-width').off('input').on('input', function () {
-        var actualWidth=$(this).val()
+    jQuery('#stroke-width').off('input').on('input', function () {
+        var actualWidth=jQuery(this).val()
         if (actualWidth == 0) {
             actualWidth = null
         }
         setValue("strokeWidth", actualWidth)
     })
 
-    $('#shadow-depth').off('input').on('input', function () {
-        setValue("shadow", createShadow('black', $('#shadow-depth').val()))
+    jQuery('#shadow-depth').off('input').on('input', function () {
+        setValue("shadow", createShadow('black', jQuery('#shadow-depth').val()))
     })
 
-    $('#opacity').off('input').on('input', function () {
-        setValue("opacity", parseFloat($(this).val() / 100))
+    jQuery('#opacity').off('input').on('input', function () {
+        setValue("opacity", parseFloat(jQuery(this).val() / 100))
     })
 }
 
@@ -97,28 +97,28 @@ function loadObjectHandlers() {
 *****************************/
 
 // Update style of font-style buttons
-$('.edit-btn').on('update-status', function () {
-    if ($(this).attr('data') == '') {
-        $(this).removeClass('active')
+jQuery('.edit-btn').on('update-status', function () {
+    if (jQuery(this).attr('data') == '') {
+        jQuery(this).removeClass('active')
     } else {
-        $(this).addClass('active')
+        jQuery(this).addClass('active')
     }
 })
 
 //  Toggle font-style buttons
-$('#font-style .btn').on('click', function () {
-    if ($(this).attr('data') == '') {
-        $(this).addClass('active')
-        $(this).attr('data', $(this).attr('value'))
+jQuery('#font-style .btn').on('click', function () {
+    if (jQuery(this).attr('data') == '') {
+        jQuery(this).addClass('active')
+        jQuery(this).attr('data', jQuery(this).attr('value'))
     } else {
-        $(this).removeClass('active')
-        $(this).attr('data', '')
+        jQuery(this).removeClass('active')
+        jQuery(this).attr('data', '')
     }
-    $(this).trigger('change-value')
+    jQuery(this).trigger('change-value')
 })
 
 // Update style of text align buttons
-$('.align').on('update-status', function () {
-    $('.align').removeClass('active')
-    $(this).addClass('active')
+jQuery('.align').on('update-status', function () {
+    jQuery('.align').removeClass('active')
+    jQuery(this).addClass('active')
 })

@@ -1,4 +1,4 @@
 // Intialize font-family select
-$('select').selectpicker({
+jQuery('select').selectpicker({
     style: 'new-select',
 })

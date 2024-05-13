@@ -6,6 +6,10 @@ var contentImage;
 var logo;
 var logoName;
 
+if (typeof generatorApplicationURL == 'undefined'){
+    var generatorApplicationURL = "";
+}
+
 var template_values = {
     story: {
         width: 1080,
@@ -90,11 +94,11 @@ var template_values = {
 }
 
 function currentTemplate() {
-    return template_values[$('#canvas-template').find(":selected").attr('value')]
+    return template_values[jQuery('#canvas-template').find(":selected").attr('value')]
 }
 
 function replaceCanvas() {
-    template = $('#canvas-template').find(":selected").attr('value')
+    template = jQuery('#canvas-template').find(":selected").attr('value')
     if (canvas != null) {
         canvas.dispose();
     }
@@ -104,11 +108,11 @@ function replaceCanvas() {
     var topBorderMultiplier = current_template.topBorderMultiplier;
     var border = current_template.border;
 
-    $(window).resize(resizeCanvas)
+    jQuery(window).resize(resizeCanvas)
     function resizeCanvas() {
-        var wrapperWidth = $('.fabric-canvas-wrapper').width()
-        $('.canvas-container').css('width', wrapperWidth)
-        $('.canvas-container').css('height', wrapperWidth * height / width)
+        var wrapperWidth = jQuery('.fabric-canvas-wrapper').width()
+        jQuery('.canvas-container').css('width', wrapperWidth)
+        jQuery('.canvas-container').css('height', wrapperWidth * height / width)
     }
 
     // Intialize fabric canvas
@@ -122,8 +126,8 @@ function replaceCanvas() {
         preserveObjectStacking: true,
     });
 
-    $('#scale').attr('max', canvas.width * 0.0025)
-    $('#scale').val(canvas.width * 0.0025 / 2)
+    jQuery('#scale').attr('max', canvas.width * 0.0025)
+    jQuery('#scale').val(canvas.width * 0.0025 / 2)
 
     resizeCanvas();
     canvas.renderAll();
@@ -154,7 +158,7 @@ function addLogo() {
 
 
     scaleTo = (contentRect.width + contentRect.height) / 10
-    logoText = $('#logo-selection').find(":selected").attr('value').trim().toUpperCase()
+    logoText = jQuery('#logo-selection').find(":selected").attr('value').trim().toUpperCase()
 
     if (logoText.length > 16 || logoText.lastIndexOf('%') > 0) {
         var logoFilename = "Gruene_Logo_245_268.png"
@@ -173,7 +177,7 @@ function addLogo() {
         logoFilename = logoFilename.replace('245', '120').replace('248', '121').replace('268', '131')
     }
 
-    logo_image = fabric.Image.fromURL("resources/images/logos/" + logoFilename, function (image) {
+    logo_image = fabric.Image.fromURL(generatorApplicationURL + "resources/images/logos/" + logoFilename, function (image) {
         image.scaleToWidth(scaleTo);
         image.lockMovementX = true;
         image.lockMovementY = true;
@@ -194,7 +198,7 @@ function addLogo() {
             fill: 'rgb(255,255,255)',
             stroke: '#000000',
             strokeWidth: 0,
-            // shadow: createShadow('#000000', $('#shadow-depth').val()),
+            // shadow: createShadow('#000000', jQuery('#shadow-depth').val()),
             objectCaching: false,
             lineHeight: 0.8,
             angle: -5.5,
@@ -285,64 +289,58 @@ function enableSnap() {
 }
 
 replaceCanvas();
-
-$('#canvas-template').off('change').on('change', function () {
-    $('#canvas-template').selectpicker('refresh');
+jQuery('#canvas-template').off('change').on('change', function () {
+    jQuery('#canvas-template').selectpicker('refresh');
     replaceCanvas();
 })
-
-$('#logo-selection').off('change').on('change', function () {
-    $('#logo-selection').selectpicker('refresh');
+jQuery('#logo-selection').off('change').on('change', function () {
+    jQuery('#logo-selection').selectpicker('refresh');
     addLogo();
 })
-
-$('#scale-direction').off('change').on('change', function () {
-    $('#scale-direction').selectpicker('refresh');
+jQuery('#scale-direction').off('change').on('change', function () {
+    jQuery('#scale-direction').selectpicker('refresh');
     positionBackgroundImage();
 })
-
-$('#add-text').off('click').on('click', function () {
-    if ($('#text').val() == '') {
+jQuery('#add-text').off('click').on('click', function () {
+    if (jQuery('#text').val() == '') {
         showAlert('Error! Text field is empty')
         return
     }
 
     // Create new text object
-    var text = new fabric.Text($('#text').val(), {
+    var text = new fabric.Text(jQuery('#text').val(), {
         top: 200,
-        fontFamily: "Gotham Narrow", //$('#font-family').find(":selected").attr('value'),
+        fontFamily: "Gotham Narrow", //jQuery('#font-family').find(":selected").attr('value'),
         fontSize: canvas.width / 2,
         fontStyle: 'normal',
-        textAlign: $('input[name="align"]:checked').val(),
-        fill: $('#text-color').find(":selected").attr('value'),
+        textAlign: jQuery('input[name="align"]:checked').val(),
+        fill: jQuery('#text-color').find(":selected").attr('value'),
         stroke: '#000000',
         strokeWidth: 0,
-        shadow: createShadow('#000000', $('#shadow-depth').val()),
+        shadow: createShadow('#000000', jQuery('#shadow-depth').val()),
         objectCaching: false,
         lineHeight: 0.7,
     })
 
     text.scaleToWidth(canvas.width / 3)
-    $('#scale').val(text.scaleX)
+    jQuery('#scale').val(text.scaleX)
 
     canvas.add(text).setActiveObject(text);
     loadFont(text.fontFamily);
     canvas.centerObject(text);
 })
-
-$('#generate-meme').off('click').on('click', function () {
-    var dataURL = canvas.toDataURL({ format: $('#image-format').find(":selected").attr('value'), quality: parseFloat($('#image-quality').find(":selected").attr('value')) });
+jQuery('#generate-meme').off('click').on('click', function () {
+    var dataURL = canvas.toDataURL({ format: jQuery('#image-format').find(":selected").attr('value'), quality: parseFloat(jQuery('#image-quality').find(":selected").attr('value')) });
     var link = document.createElement('a');
     link.href = dataURL;
     link.download = createImgName();
     link.click();
 })
 
-
-$('#add-image').off('input').on('input', function () {
+jQuery('#add-image').off('input').on('input', function () {
     const file = this.files[0];
     const fileType = file['type'];
-    $('#add-image').val('')
+    jQuery('#add-image').val('')
 
     if (!isImage(fileType)) {
         showAlert('Error! Invalid Image')
@@ -358,25 +356,23 @@ $('#add-image').off('input').on('input', function () {
                 image.scaleToWidth(canvas.width / 2)
                 canvas.add(image).setActiveObject(image);
                 canvas.centerObject(image)
-                $('#scale').val(image.scaleX)
+                jQuery('#scale').val(image.scaleX)
             }, {
-                opacity: $('#opacity').val()
+                opacity: jQuery('#opacity').val()
             })
         }
     }
     reader.readAsDataURL(file)
 })
-
-$('#remove-element').off('click').on('click', function () {
+jQuery('#remove-element').off('click').on('click', function () {
     if (canvas.getActiveObject() != contentImage) {
         canvas.remove(canvas.getActiveObject())
     }
 })
-
-$('#add-circle').off('click').on('click', function () {
-    $('#circle-radius').selectpicker('refresh');
+jQuery('#add-circle').off('click').on('click', function () {
+    jQuery('#circle-radius').selectpicker('refresh');
     var active_image = canvas.getActiveObject();
-    size = parseInt($('#circle-radius').find(":selected").attr('value'))
+    size = parseInt(jQuery('#circle-radius').find(":selected").attr('value'))
     if (active_image != contentImage) {
         var radius = Math.min(active_image.height, active_image.width) / size
         var clipPath = new fabric.Circle({
@@ -448,7 +444,7 @@ function positionBackgroundImage() {
             absolutePositioned: true
         });
 
-        switch ($('#scale-direction').find(":selected").attr('value')) {
+        switch (jQuery('#scale-direction').find(":selected").attr('value')) {
             case 'width':
                 contentImage.scaleToWidth(contentRect.width);
                 contentImage.lockMovementX = true;
@@ -470,14 +466,14 @@ function positionBackgroundImage() {
 }
 
 function addLogoSelection() {
-    $.getJSON("resources/images/logos/index.json", function (data) {
-        $.each(data, function (index, names) {
+    jQuery.getJSON(generatorApplicationURL + "resources/images/logos/index.json", function (data) {
+        jQuery.each(data, function (index, names) {
             var items = [];
-            $.each(names.sort(), function (index, name) {
+            jQuery.each(names.sort(), function (index, name) {
                 items.push('<option value="' + name + '">' + name.replace('%', ' ') + "</option>");
             });
-            $("#logo-selection").append('<optgroup label="' + index + '">' + items.join("") + '</optgroup>');
-            $('#logo-selection').selectpicker('refresh');
+            jQuery("#logo-selection").append('<optgroup label="' + index + '">' + items.join("") + '</optgroup>');
+            jQuery('#logo-selection').selectpicker('refresh');
         });
     });
 }
@@ -486,18 +482,17 @@ addLogoSelection()
 
 
 function autoPlayYouTubeModal() {
-    var trigger = $("body").find('[data-toggle="modal"]');
+    var trigger = jQuery("body").find('[data-toggle="modal"]');
     trigger.click(function () {
-        var theModal = $(this).data("target"),
-            videoSRC = $(this).attr("data-theVideo"),
+        var theModal = jQuery(this).data("target"),
+            videoSRC = jQuery(this).attr("data-theVideo"),
             videoSRCauto = videoSRC + "?autoplay=1";
-        $(theModal + ' iframe').attr('src', videoSRCauto);
-        $(theModal + ' button.close').click(function () {
-            $(theModal + ' iframe').attr('src', videoSRC);
+        jQuery(theModal + ' iframe').attr('src', videoSRCauto);
+        jQuery(theModal + ' button.close').click(function () {
+            jQuery(theModal + ' iframe').attr('src', videoSRC);
         });
     });
 }
-
-$(document).ready(function () {
+jQuery(document).ready(function () {
     autoPlayYouTubeModal();
 });

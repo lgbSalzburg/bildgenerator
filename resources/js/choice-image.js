@@ -1,23 +1,23 @@
-$(function () {
+jQuery(function () {
     // Eevnt: Choice meme from top 100
-    $('.memes-container').delegate('img', 'click', function () {
-        var $img = $(this)
+    jQuery('.memes-container').delegate('img', 'click', function () {
+        var $img = jQuery(this)
         var imgInfo = {
             url: $img.attr('src'),
             height: $img.attr('img-height'),
             width: $img.attr('img-width'),
         }
 
-        $('.choice-section').trigger('choice-done', imgInfo)
+        jQuery('.choice-section').trigger('choice-done', imgInfo)
     })
 
     // Event: Upload local image
-    $('#meme-input').on('change', function () {
+    jQuery('#meme-input').on('change', function () {
         const file = this.files[0];
         const fileType = file['type'];
 
         // Reset file input
-        $('#meme-input').val('')
+        jQuery('#meme-input').val('')
 
         // Validate this is image
         if (!isImage(fileType)) {
@@ -35,7 +35,7 @@ $(function () {
                     height: meme.height,
                     width: meme.width,
                 }
-                // $('.choice-section').trigger('choice-done', imgInfo)
+                // jQuery('.choice-section').trigger('choice-done', imgInfo)
                 processMeme(imgInfo)
             }
         }
