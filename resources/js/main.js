@@ -6,7 +6,7 @@ var contentImage;
 var logo;
 var logoName;
 
-if (typeof generatorApplicationURL == 'undefined'){
+if (typeof generatorApplicationURL == 'undefined') {
     var generatorApplicationURL = "";
 }
 
@@ -158,7 +158,7 @@ function addLogo() {
 
 
     scaleTo = (contentRect.width + contentRect.height) / 10
-    logoText = jQuery('#logo-selection').find(":selected").attr('value').trim().toUpperCase()
+    logoText = (jQuery('#logo-selection').find(":selected").attr('value') || "").trim().toUpperCase()
 
     if (logoText.length > 16 || logoText.lastIndexOf('%') > 0) {
         var logoFilename = "Gruene_Logo_245_268.png"
@@ -202,11 +202,17 @@ function addLogo() {
             objectCaching: false,
             lineHeight: 0.8,
             angle: -5.5,
+            // selectable: false
         })
 
         canvas.add(logoName)
-        logoName.width = image.getScaledWidth() * 0.95
 
+        linebreak = logoText.lastIndexOf('\n')
+        if (linebreak > 17 || logoText.length - linebreak > 17) {
+            logoName.scaleToWidth(image.getScaledWidth() * 0.97)
+        } else {
+            logoName.width = image.getScaledWidth() * 0.95
+        }
         // logoName.scaleToHeight(image.height/textScaleTo)
         canvas.bringToFront(logoName);
         // disableScalingControls(logoName)
@@ -470,7 +476,7 @@ function addLogoSelection() {
         jQuery.each(data, function (index, names) {
             var items = [];
             jQuery.each(names.sort(), function (index, name) {
-                items.push('<option value="' + name + '">' + name.replace('%', ' ') + "</option>");
+                items.push('<option value="' + name.toUpperCase() + '">' + name.replace('%', ' ').toUpperCase() + "</option>");
             });
             jQuery("#logo-selection").append('<optgroup label="' + index + '">' + items.join("") + '</optgroup>');
             jQuery('#logo-selection').selectpicker('refresh');
