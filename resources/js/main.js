@@ -43,13 +43,29 @@ var template_values = {
         logoTop: 0.6,
         logoTextTop: 0.862
     },
+    a2: {
+        width: 4961,
+        height: 7016,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.826,
+        logoTextTop: 0.964
+    },
+    a2_quer: {
+        width: 7016,
+        height: 4961,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.739,
+        logoTextTop: 0.9257
+    },
     a3: {
         width: 3508,
         height: 4961,
         topBorderMultiplier: 1,
         border: 20,
-        logoTop: 0.823,
-        logoTextTop: 0.961
+        logoTop: 0.826,
+        logoTextTop: 0.964
     },
     a3_quer: {
         width: 4961,
@@ -64,8 +80,8 @@ var template_values = {
         height: 3508,
         topBorderMultiplier: 1,
         border: 20,
-        logoTop: 0.823,
-        logoTextTop: 0.961
+        logoTop: 0.826,
+        logoTextTop: 0.964
     },
     a4_quer: {
         width: 3508,
@@ -80,8 +96,8 @@ var template_values = {
         height: 2480,
         topBorderMultiplier: 1,
         border: 20,
-        logoTop: 0.823,
-        logoTextTop: 0.961
+        logoTop: 0.826,
+        logoTextTop: 0.964
     },
     a5_quer: {
         width: 2480,
