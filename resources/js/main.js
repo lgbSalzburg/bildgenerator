@@ -370,11 +370,13 @@ jQuery('#add-text').off('click').on('click', function () {
     canvas.centerObject(text);
 })
 jQuery('#generate-meme').off('click').on('click', function () {
-    var dataURL = canvas.toDataURL({ format: jQuery('#image-format').find(":selected").attr('value'), quality: parseFloat(jQuery('#image-quality').find(":selected").attr('value')) });
-    var link = document.createElement('a');
-    link.href = dataURL;
-    link.download = createImgName();
-    link.click();
+    if (confirm("Hast du das Copyright bei Fotos überprüft und angegeben und das Impressum wo notwendig hinzugefügt?")){
+        var dataURL = canvas.toDataURL({ format: jQuery('#image-format').find(":selected").attr('value'), quality: parseFloat(jQuery('#image-quality').find(":selected").attr('value')) });
+        var link = document.createElement('a');
+        link.href = dataURL;
+        link.download = createImgName();
+        link.click();
+    }
 })
 
 jQuery('#add-image').off('input').on('input', function () {
