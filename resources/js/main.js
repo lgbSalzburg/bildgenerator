@@ -280,6 +280,20 @@ function disableScalingControls(object) {
     });
 }
 
+function relativeScalingControlsOnly(object) {
+    object.setControlsVisibility({
+        mt: false, // middle top disable
+        mb: false, // midle bottom
+        ml: false, // middle left
+        mr: false, // I think you get it
+        bl: true,
+        br: true,
+        tl: true,
+        tr: true,
+        mtr: true
+    });
+}
+
 function enableSnap() {
     var snapZone = canvas.width / 20;
     canvas.on('object:moving', function (options) {
@@ -330,6 +344,8 @@ jQuery('#add-text').off('click').on('click', function () {
         lineHeight: 0.7,
     })
 
+    relativeScalingControlsOnly(text);
+
     text.scaleToWidth(canvas.width / 3)
     jQuery('#scale').val(text.scaleX)
 
@@ -362,6 +378,7 @@ jQuery('#add-image').off('input').on('input', function () {
         image.onload = function () {
             fabric.Image.fromURL(reader.result, function (image) {
                 image.scaleToWidth(canvas.width / 2)
+                relativeScalingControlsOnly(image);
                 canvas.add(image).setActiveObject(image);
                 canvas.centerObject(image)
                 jQuery('#scale').val(image.scaleX)
