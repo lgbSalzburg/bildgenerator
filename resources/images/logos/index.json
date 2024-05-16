@@ -1,7 +1,7 @@
 {
     "Bundesländer": [
         "ZELENI/ZÖLDEK/SELENE%BURGENLAND",
-        "Salzburg"
+        "SALZBURG"
     ],
     "Klubs": [
         "ZELENI/ZÖLDEK/SELENE%LANDTAGSKLUB BURGENLAND"
@@ -14,7 +14,12 @@
         "BEZIRK OBERWART",
         "BEZIRK GÜSSING/JENNERSDORF",
         "BEZIRK GÜSSING",
-        "BEZIRK JENNERSDORF"
+        "BEZIRK JENNERSDORF",
+        "BEZIRK FLACHGAU",
+        "BEZIRK TENNENGAU",
+        "BEZIRK PINZGAU",
+        "BEZIRK PINGAU",
+        "BEZIRK LUNGAU"
     ],
     "Gebiete": [
         "BURGENLAND SÜD",
@@ -49,6 +54,29 @@
         "WIESEN",
         "WINDEN AM SEE",
         "ZILLINGTAL",
-        "Herzogenburg"
+        "HERZOGENBURG",
+        "ANIF",
+        "ANTHERING",
+        "BERGHEIM",
+        "BRUCK AN DER GROSSGLOCKNERSTRASSE",
+        "EUGENDORF",
+        "FUSCHL",
+        "GRÖDIG",
+        "GROSSGMAIN",
+        "HALLEIN",
+        "HALLWANG",
+        "KOPPL",
+        "KUCHL",
+        "NEUMARKT",
+        "OBERALM",
+        "OBERNDORF",
+        "OBERTRUM",
+        "PLAINFELD",
+        "PUCH",
+        "SAALFELDEN",
+        "SEEHAM",
+        "ST. GILGEN",
+        "STROBL",
+        "ZELL AM SEE"
     ]
 }
