@@ -199,6 +199,7 @@ function addLogo() {
         image.lockMovementY = true;
         image.top = canvas.height * currentTemplate().logoTop;
         disableScalingControls(image)
+        image.selectable = false;
         canvas.add(image);
         canvas.centerObjectH(image);
         canvas.bringToFront(image);
@@ -408,10 +409,11 @@ jQuery('#add-image').off('input').on('input', function () {
     reader.readAsDataURL(file)
 })
 jQuery('#remove-element').off('click').on('click', function () {
-    if (canvas.getActiveObject() != contentImage) {
+    if (canvas.getActiveObject() != contentImage && canvas.getActiveObject() != logo) {
         canvas.remove(canvas.getActiveObject())
     }
 })
+
 jQuery('#add-circle').off('click').on('click', function () {
     jQuery('#circle-radius').selectpicker('refresh');
     var active_image = canvas.getActiveObject();
@@ -430,6 +432,27 @@ jQuery('#add-circle').off('click').on('click', function () {
         }
         canvas.renderAll();
     }
+})
+
+jQuery('#add-pink-circle').off('click').on('click', function () {
+    radius = contentRect.width / 4
+    var pinkCircle = new fabric.Circle({
+        top: contentRect.height / 3,
+        left: contentRect.width / 3,
+        radius: radius,
+        fill: "rgb(225,0,120)"
+    });
+    relativeScalingControlsOnly(pinkCircle)
+    canvas.add(pinkCircle)
+    for (object of canvas.getObjects()) {
+        console.log(object)
+        console.log(object.get('type'))
+        if (object.get('type') == 'text') {
+            console.log('Front')
+            canvas.bringToFront(object)
+        }
+    }
+    canvas.renderAll()
 })
 
 

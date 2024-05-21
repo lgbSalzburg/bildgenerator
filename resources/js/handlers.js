@@ -24,7 +24,6 @@ function updateInputs() {
     if (activeObject.get('type') == "text") {
         enableTextMethods()
         jQuery('#text').val(activeObject.text)
-        jQuery('#font-family').val(activeObject.fontFamily).selectpicker('refresh')
         jQuery('#text-color').val(activeObject.fill).selectpicker('refresh')
         jQuery('#font-size').val(activeObject.fontSize)
         jQuery(`input[value="${activeObject.textAlign}"]`).parent().trigger('update-status')
@@ -33,7 +32,6 @@ function updateInputs() {
         jQuery('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
     }
 
-    jQuery('#opacity').val(parseInt(activeObject.opacity * 100))
     jQuery('#scale').val(parseFloat(activeObject.scaleX))
 }
 
@@ -55,20 +53,9 @@ function loadObjectHandlers() {
 
     jQuery('#text-color').off('change').on('change', function () {
         jQuery('#text-color').selectpicker('refresh')
-        if (canvas.getActiveObject() != null) {
-          setValue("fill", jQuery(this).find(":selected").attr('value'))
+        if (canvas.getActiveObject() != null && canvas.getActiveObject().get('type') == "text") {
+            setValue("fill", jQuery(this).find(":selected").attr('value'))
         }
-    })
-
-    jQuery('#font-family').off('change').on('change', function () {
-        jQuery('#font-family').selectpicker('refresh')
-        if (canvas.getActiveObject() != null) {
-            loadFont(jQuery(this).find(":selected").attr('value'))
-        }
-    })
-
-    jQuery('#font-size').off('input').on('input', function () {
-        setValue("fontSize", jQuery(this).val())
     })
 
     jQuery('input[name="align"]').off('change').on('change', function () {
@@ -76,7 +63,7 @@ function loadObjectHandlers() {
     })
 
     jQuery('#stroke-width').off('input').on('input', function () {
-        var actualWidth=jQuery(this).val()
+        var actualWidth = jQuery(this).val()
         if (actualWidth == 0) {
             actualWidth = null
         }
@@ -87,9 +74,6 @@ function loadObjectHandlers() {
         setValue("shadow", createShadow('black', jQuery('#shadow-depth').val()))
     })
 
-    jQuery('#opacity').off('input').on('input', function () {
-        setValue("opacity", parseFloat(jQuery(this).val() / 100))
-    })
 }
 
 /*****************************
