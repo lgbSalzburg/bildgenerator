@@ -62,8 +62,8 @@
         "BRUCK AN DER GROSSGLOCKNERSTRASSE",
         "EUGENDORF",
         "FUSCHL",
-        "GRÖDIG",
-        "GROSSGMAIN",
+        "+UNABHÄNGIGEN%GRÖDIG",
+        "TÖV-GROSSGMAIN",
         "HALLEIN",
         "HALLWANG",
         "KOPPL",
@@ -78,6 +78,6 @@
         "SEEHAM",
         "ST. GILGEN",
         "STROBL",
-        "ZELL AM SEE"
+        "GRÜBL ZELL AM SEE"
     ]
 }
