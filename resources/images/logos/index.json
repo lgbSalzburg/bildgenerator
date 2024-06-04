@@ -1,7 +1,4 @@
 {
-    "Andere": [
-        "Bäuerinnnen%& Bauern"
-    ],
     "Bundesländer": [
         "ZELENI/ZÖLDEK/SELENE%BURGENLAND",
         "SALZBURG",
@@ -82,5 +79,8 @@
         "ST. GILGEN",
         "STROBL",
         "GRÜBL%ZELL AM SEE"
+    ],
+    "Andere": [
+        "Bäuerinnnen%& Bauern"
     ]
 }
