@@ -32,7 +32,7 @@ function updateInputs() {
 
 function updateScale(activeObject) {
     scale = Number(parseFloat(activeObject.scaleX)).toFixed(2)
-    jQuery('#scale-value').val(scale)
+    // jQuery('#scale-value').val(scale)
     jQuery('#scale').val(scale)
 }
 
@@ -44,11 +44,11 @@ function loadObjectHandlers() {
     })
 
     jQuery('#scale').off('input').on('input', function () {
-        if (canvas.getActiveObject() != null) {
-            var activeText = canvas.getActiveObject()
-            activeText.scale(parseFloat(this.value)).setCoords();
+        var activeObject = canvas.getActiveObject()
+        if (activeObject != null && activeObject != contentImage) {
+            activeObject.scale(parseFloat(this.value)).setCoords();
             canvas.renderAll();
-            updateScale(activeText)
+            updateScale(activeObject)
         }
     })
 

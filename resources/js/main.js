@@ -366,7 +366,7 @@ jQuery('#add-text').off('click').on('click', function () {
     var text = new fabric.Text(jQuery('#text').val(), {
         top: 200,
         fontFamily: "Gotham Narrow", //jQuery('#font-family').find(":selected").attr('value'),
-        fontSize: canvas.width / 4,
+        fontSize: canvas.width / 2,
         fontStyle: 'normal',
         textAlign: jQuery('input[name="align"]:checked').val(),
         fill: jQuery('#text-color').find(":selected").attr('value'),
@@ -377,6 +377,9 @@ jQuery('#add-text').off('click').on('click', function () {
         lineHeight: 0.7,
         centeredScaling: false
     })
+
+    relativeScalingControlsOnly(text);
+    text.scaleToWidth(canvas.width / 2)
 
 
     canvas.add(text).setActiveObject(text);
