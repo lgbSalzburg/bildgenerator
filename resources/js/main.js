@@ -5,6 +5,8 @@ var contentRect;
 var contentImage;
 var logo;
 var logoName;
+var logoText
+var scaleMax;
 
 if (typeof generatorApplicationURL == 'undefined') {
     var generatorApplicationURL = "";
@@ -26,8 +28,8 @@ var template_values = {
         border: 20,
         logoTop: 0.789,
         logoTextTop: 0.947
-    }
-    , event: {
+    },
+    event: {
         width: 1200,
         height: 628,
         topBorderMultiplier: 1,
@@ -142,8 +144,8 @@ function replaceCanvas() {
         preserveObjectStacking: true,
     });
 
-    jQuery('#scale').attr('max', canvas.width * 0.0025)
-    jQuery('#scale').val(canvas.width * 0.0025 / 2)
+    scaleMax = canvas.width * 0.0020
+    jQuery('#scale').attr('max', scaleMax)
 
     resizeCanvas();
     canvas.renderAll();
@@ -163,6 +165,7 @@ function replaceCanvas() {
     canvas.add(contentRect)
     enableSnap();
     enablePictureMove();
+    enableScalingUpdates();
     addLogo();
 }
 
@@ -233,10 +236,23 @@ function addLogo() {
             logoName.width = image.getScaledWidth() * 0.95
         }
         // logoName.scaleToHeight(image.height/textScaleTo)
-        canvas.bringToFront(logoName);
+
         // disableScalingControls(logoName)
         canvas.centerObjectH(logoName);
+        logo_to_front()
         canvas.renderAll()
+    });
+}
+
+function logo_to_front(params) {
+    canvas.bringToFront(logo);
+    canvas.bringToFront(logoName);
+}
+
+function enableScalingUpdates() {
+    canvas.on('object:scaling', function (options) {
+        console.log("isScaling")
+        updateScale(options.target)
     });
 }
 
@@ -350,7 +366,7 @@ jQuery('#add-text').off('click').on('click', function () {
     var text = new fabric.Text(jQuery('#text').val(), {
         top: 200,
         fontFamily: "Gotham Narrow", //jQuery('#font-family').find(":selected").attr('value'),
-        fontSize: canvas.width / 2,
+        fontSize: canvas.width / 4,
         fontStyle: 'normal',
         textAlign: jQuery('input[name="align"]:checked').val(),
         fill: jQuery('#text-color').find(":selected").attr('value'),
@@ -359,24 +375,26 @@ jQuery('#add-text').off('click').on('click', function () {
         shadow: createShadow('#000000', jQuery('#shadow-depth').val()),
         objectCaching: false,
         lineHeight: 0.7,
+        centeredScaling: false
     })
 
-    relativeScalingControlsOnly(text);
-
-    text.scaleToWidth(canvas.width / 3)
-    jQuery('#scale').val(text.scaleX)
 
     canvas.add(text).setActiveObject(text);
     loadFont(text.fontFamily);
     canvas.centerObject(text);
+    updateScale(text)
 })
 jQuery('#generate-meme').off('click').on('click', function () {
-    if (confirm("Hast du das Copyright bei Fotos überprüft und angegeben und das Impressum wo notwendig hinzugefügt?")){
-        var dataURL = canvas.toDataURL({ format: jQuery('#image-format').find(":selected").attr('value'), quality: parseFloat(jQuery('#image-quality').find(":selected").attr('value')) });
-        var link = document.createElement('a');
-        link.href = dataURL;
-        link.download = createImgName();
-        link.click();
+    if (logoText != "") {
+        if (confirm("Hast du das Copyright bei Fotos überprüft und angegeben und das Impressum wo notwendig hinzugefügt?")) {
+            var dataURL = canvas.toDataURL({ format: jQuery('#image-format').find(":selected").attr('value'), quality: parseFloat(jQuery('#image-quality').find(":selected").attr('value')) });
+            var link = document.createElement('a');
+            link.href = dataURL;
+            link.download = createImgName();
+            link.click();
+        }
+    } else {
+        alert("Wähle bitte ein Logo aus vor dem Download!")
     }
 })
 
@@ -399,8 +417,9 @@ jQuery('#add-image').off('input').on('input', function () {
                 image.scaleToWidth(canvas.width / 2)
                 relativeScalingControlsOnly(image);
                 canvas.add(image).setActiveObject(image);
-                canvas.centerObject(image)
-                jQuery('#scale').val(image.scaleX)
+                canvas.centerObject(image);
+                updateScale(image);
+                logo_to_front()
             }, {
                 opacity: jQuery('#opacity').val()
             })
@@ -510,19 +529,14 @@ function positionBackgroundImage() {
             absolutePositioned: true
         });
 
-        switch (jQuery('#scale-direction').find(":selected").attr('value')) {
-            case 'width':
-                contentImage.scaleToWidth(contentRect.width);
-                contentImage.lockMovementX = true;
-                contentImage.lockMovementY = false;
-                break;
-            case 'height':
-                contentImage.scaleToHeight(contentRect.height);
-                contentImage.lockMovementY = true;
-                contentImage.lockMovementX = false;
-                break;
-            default:
-                console.log("error")
+        if (contentImage.width > contentImage.height) {
+            contentImage.scaleToHeight(contentRect.height);
+            contentImage.lockMovementY = true;
+            contentImage.lockMovementX = false;
+        } else {
+            contentImage.scaleToWidth(contentRect.width);
+            contentImage.lockMovementX = true;
+            contentImage.lockMovementY = false;
         }
         contentImage.clipPath = clipRect;
         canvas.add(contentImage);

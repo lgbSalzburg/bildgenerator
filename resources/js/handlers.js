@@ -25,14 +25,15 @@ function updateInputs() {
         enableTextMethods()
         jQuery('#text').val(activeObject.text)
         jQuery('#text-color').val(activeObject.fill).selectpicker('refresh')
-        jQuery('#font-size').val(activeObject.fontSize)
         jQuery(`input[value="${activeObject.textAlign}"]`).parent().trigger('update-status')
-        jQuery('#stroke-width').val(activeObject.strokeWidth)
-        jQuery('#shadow-depth').val(activeObject.shadow.blur)
-        jQuery('#bg-option').attr('data', activeObject.textBackgroundColor).trigger('update-status')
+        updateScale(activeObject)
     }
+}
 
-    jQuery('#scale').val(parseFloat(activeObject.scaleX))
+function updateScale(activeObject) {
+    scale = Number(parseFloat(activeObject.scaleX)).toFixed(2)
+    jQuery('#scale-value').val(scale)
+    jQuery('#scale').val(scale)
 }
 
 
@@ -47,9 +48,9 @@ function loadObjectHandlers() {
             var activeText = canvas.getActiveObject()
             activeText.scale(parseFloat(this.value)).setCoords();
             canvas.renderAll();
+            updateScale(activeText)
         }
     })
-
 
     jQuery('#text-color').off('change').on('change', function () {
         jQuery('#text-color').selectpicker('refresh')

@@ -31,7 +31,7 @@
                 <h1 class="text-dark display-5"><img src="resources/images/gruene-logo.svg" width=50 />rüner
                     Bildgenerator
                 </h1>
-                <span class="text-muted discription ">
+                <span class="text-muted discription mb-2 ">
 
                     <p>Bild Generator, basierend auf Meme-it. <a href="https://github.com/GrueneAT/bildgenerator"
                             target="_blank" class="badge badge-dark"><i class="fab fa-github mr-1"></i>GitHub</a></p>
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="container edit-section">
+    <div class="container edit-section pt-2">
         <div class="row d-lg-none d-md-none">
             <div class="col">
                 <p>Auf mobilen Endgeräten funktionieren nicht alle Vorlagen gut, bitte in dem Fall auf einem
@@ -72,9 +72,10 @@
                 <div class="meme-preview">
                     <div class="fabric-canvas-wrapper"><canvas id="meme-canvas"></canvas></div>
                 </div>
-                <div class="form-group d-lg-none d-md-none">
-                    <label for="scale">Scale:</label>
-                    <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01">
+                <div class="form-group">
+                    <label for="scale">Skalierung (-50 bis +50):</label>
+                    <input type="range" class="form-control-range" id="scale" min="0.1" step="0.01" , max="2">
+                    <output id="scale-value"></output>
                 </div>
             </div>
             <div class="col-md-6">
@@ -86,6 +87,7 @@
                                 data-live-search="true">
                                 <optgroup label="Social Media">
                                     <option value="post">Post</option>
+                                    <option value="post_no_border">Post ohne Rand</option>
                                     <option value="story">Story</option>
                                     <option value="event">Veranstaltung</option>
                                     <option value="facebook_header">Facebook Header</option>
@@ -119,13 +121,6 @@
                     <div class="col">
                         <input type="file" class="d-none" id="meme-input">
                         <label class="btn btn-success btn-block" for="meme-input">Hintergrundbild aussuchen</label>
-                        <label for="canvas-template">Hintergrundbild anpassen an:</label>
-                        <span class="input-group-append">
-                            <select class="form-control text-method" name="scale-direction" id="scale-direction">
-                                <option value="height">Höhe</option>
-                                <option value="width">Breite</option>
-                            </select>
-                        </span>
                     </div>
                 </div>
                 <div class="form-group">
