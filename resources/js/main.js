@@ -532,11 +532,16 @@ function positionBackgroundImage() {
             absolutePositioned: true
         });
 
-        if (contentImage.width > contentImage.height) {
+        if (contentRect.width > contentRect.height) {
+            contentImage.scaleToWidth(contentRect.width);
+            contentImage.lockMovementX = true;
+            contentImage.lockMovementY = false;
+        } else if (contentRect.width < contentRect.height || contentImage.width > contentImage.height) {
             contentImage.scaleToHeight(contentRect.height);
             contentImage.lockMovementY = true;
             contentImage.lockMovementX = false;
-        } else {
+        }
+        else {
             contentImage.scaleToWidth(contentRect.width);
             contentImage.lockMovementX = true;
             contentImage.lockMovementY = false;
