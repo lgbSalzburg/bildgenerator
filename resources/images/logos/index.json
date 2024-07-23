@@ -79,13 +79,17 @@
         "SEEHAM",
         "ST. GILGEN",
         "STROBL",
-        "GRÜBL%ZELL AM SEE"
+        "GRÜBL%ZELL AM SEE",
+        "WILLHERING"
     ],
     "Andere": [
         "Bäuerinnnen%& Bauern",
         "GENERATION plus OÖ",
         "GENERATION plus%Oberösterreich",
         "GENERATION plus%Tirol",
+        "GENERATION plus%Kärnten",
+        "GENERATION plus%Steiermark",
+        "GENERATION plus%Salzburg",
         "GENERATION plus"
     ]
 }
