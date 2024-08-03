@@ -29,6 +29,22 @@ var template_values = {
         logoTop: 0.789,
         logoTextTop: 0.947
     },
+    horizontal: {
+        width: 1920,
+        height: 1080,
+        topBorderMultiplier: 1,
+        border: 20,
+        logoTop: 0.75,
+        logoTextTop: 0.963
+    },
+    vertical: {
+        width: 1080,
+        height: 1920,
+        topBorderMultiplier: 1,
+        border: 10,
+        logoTop: 0.84,
+        logoTextTop: 0.958
+    },
     event: {
         width: 1200,
         height: 628,
@@ -583,4 +599,12 @@ function autoPlayYouTubeModal() {
 }
 jQuery(document).ready(function () {
     autoPlayYouTubeModal();
+});
+
+document.addEventListener('keydown', function(event){
+    if(event.which == 46) {
+        if (canvas.getActiveObject() != contentImage && canvas.getActiveObject() != logo) {
+            canvas.remove(canvas.getActiveObject())
+        }
+    }
 });
