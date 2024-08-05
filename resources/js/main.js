@@ -585,6 +585,18 @@ jQuery(document).ready(function () {
     autoPlayYouTubeModal();
 });
 
+jQuery('#background').off('click').on('click', function () {
+    if (canvas.getActiveObject() != contentImage && canvas.getActiveObject() != logo) {
+        canvas.sendBackwards(canvas.getActiveObject(),true)
+    }
+})
+
+jQuery('#foreground').off('click').on('click', function () {
+    if (canvas.getActiveObject() != contentImage && canvas.getActiveObject() != logo) {
+        canvas.bringForward(canvas.getActiveObject(),true)
+    }
+})
+
 document.addEventListener('keydown', function(event){
     //Delete
     if(event.which == 46) {
